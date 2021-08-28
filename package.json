@@ -14,9 +14,11 @@
   "dependencies": {
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/i18n": "^7.0.2",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
-    "push-dir": "^0.4.1"
+    "push-dir": "^0.4.1",
+    "tailwindcss-rtl": "^0.7.3"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

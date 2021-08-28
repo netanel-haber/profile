@@ -21,7 +21,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/i18n.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -39,7 +39,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/content
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/i18n'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -52,5 +53,16 @@ export default {
   build: {},
   googleAnalytics: {
     id: 'G-H4EDVS6F23'
+  },
+  i18n: {
+    locales: [
+      { code: 'en', name: 'English', dir: 'ltr' },
+      { code: 'he', name: 'עברית', dir: 'rtl' }
+    ],
+    vueI18nLoader: true,
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en'
+    }
   }
 }
