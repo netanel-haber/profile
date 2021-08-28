@@ -1,10 +1,7 @@
 export default {
-  // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'profile',
+    title: 'Netanel',
     htmlAttrs: {
       lang: 'en'
     },
@@ -16,48 +13,24 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['~/plugins/i18n.js'],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     '@nuxtjs/google-analytics',
     '@nuxtjs/tailwindcss'
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-    // https://go.nuxtjs.dev/content
-    '@nuxt/content',
-    '@nuxtjs/i18n'
-  ],
+  modules: ['@nuxtjs/axios', '@nuxt/content', '@nuxtjs/i18n'],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
-
-  // Content module configuration: https://go.nuxtjs.dev/config-content
-  content: {},
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
   googleAnalytics: {
     id: 'G-H4EDVS6F23'
   },
   i18n: {
     locales: [
-      { code: 'en', name: 'English', dir: 'ltr' },
-      { code: 'he', name: 'עברית', dir: 'rtl' }
+      { code: 'en', name: '🇺🇸', dir: 'ltr' },
+      { code: 'he', name: '🇮🇱', dir: 'rtl' }
     ],
     vueI18nLoader: true,
     defaultLocale: 'en',
