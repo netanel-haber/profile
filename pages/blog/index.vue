@@ -1,5 +1,6 @@
 <template>
-  <div class="blog container mx-auto">
+  <div class="mx-auto flex flex-col gap-2">
+    <Me />
     <section class="flex flex-col gap-10">
       <article v-for="(post, $index) in posts" :key="`post-${$index}`">
         <div class="p-1">

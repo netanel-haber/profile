@@ -6,8 +6,6 @@ date: February 27, 2021
 
 # TypeScript, TypeSystems and JavaScript
 
-[Originally published on February 27, 2021, on Medium](https://medium.com/@netanel.t.haber/typescript-typesystems-and-javascript-83153f249ce3?source=post_page-----83153f249ce3--------------------------------)
-
 ## Buzzwords
 
 TypeScript (or “TS”) is a language built upon JavaScript (or “JS”), the primary (perhaps a vast, vast understatement) language used to program web applications. The term “built upon” is important here — TS is “strict superset” of JavaScript. This means that any valid JS program is also a valid TS program.
@@ -79,3 +77,5 @@ In many other type systems, types can act in for other types only if an explicit
 ## Giving the Web Context
 
 In a final note, moving this text from notepad to an actual text editor with a spellchecker has shamefully revealed many squiggly lines, red, blue and green. In an imperfect analogy, JS editors have long had red lines for syntax errors (a.k.a. spelling mistakes). TS is more than a library, as it introduces a feature entirely impossible in current JS — green and blue squiggly lines, for contextual and grammatical errors. Suddenly my programs are more than blocks of black text, they speak to me and challenge my assumptions. So while we roll in the [slim surplus of cash](https://insights.stackoverflow.com/survey/2020#technology-what-languages-are-associated-with-the-highest-salaries-worldwide) we supposedly make by writing TS over plain JS, let’s all collectively move our programs from notepad to a text editor.
+
+[Originally published on February 27, 2021, on Medium](https://medium.com/@netanel.t.haber/typescript-typesystems-and-javascript-83153f249ce3?source=post_page-----83153f249ce3--------------------------------)
