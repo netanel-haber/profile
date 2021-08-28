@@ -1,25 +1,17 @@
 <template>
   <div class="blog container mx-auto">
-    <section class="grid grid-cols-3 gap-4 pt-12">
-      <article
-        v-for="(post, $index) in posts"
-        :key="`post-${$index}`"
-        class="post max-w-sm rounded overflow-hidden shadow-lg flex flex-col"
-      >
-        <img class="w-full" :src="post.media" :alt="post.title" />
-        <div class="px-6 py-4 flex-2">
-          <h3>{{ post.title }}</h3>
-          <p class="text-gray-700 text-base">
-            {{ post.description }}
-          </p>
+    <section class="flex flex-col gap-10">
+      <article v-for="(post, $index) in posts" :key="`post-${$index}`">
+        <div class="p-1">
+          <div class="mb-2">
+            <nuxt-link class="text-blue-600 text-lg" :to="post.path">
+              {{ post.title }}
+            </nuxt-link>
+          </div>
+          <div class="text-xs mb-1">{{ post.date }}</div>
+          <div class="text-sm text-gray-600">{{ post.description }}</div>
         </div>
-        <footer class="p-4">
-          <nuxt-link :to="post.path" class="font-bold text-xl mb-2">
-            <button :to="post.path" class="btn btn-teal">
-              {{ $t('read-more') }}
-            </button>
-          </nuxt-link>
-        </footer>
+        <hr />
       </article>
     </section>
   </div>
@@ -27,12 +19,18 @@
 
 <script>
 export default {
-  name: 'Blog',
-  asyncData: ({
+  asyncData({
     $content,
     app: {
       i18n: { locale }
     }
-  }) => $content(`${locale}/blog'`).fetch()
+  }) {
+    return $content(`/${locale}/blog`)
+      .fetch()
+      .then((posts) =>
+        posts.map((p) => ({ ...p, path: p.path.replace(`/${locale}/`, '') }))
+      )
+      .then((posts) => ({ posts }))
+  }
 }
 </script>

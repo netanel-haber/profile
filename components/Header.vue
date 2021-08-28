@@ -7,7 +7,7 @@
         flex
         justify-between
         items-center
-        max-w-4xl
+        max-w-2xl
         m-auto
       "
     >
