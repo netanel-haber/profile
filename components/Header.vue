@@ -9,6 +9,7 @@
         items-center
         max-w-2xl
         m-auto
+        h-9
       "
     >
       <nuxt-link class="text-2xl" :to="localePath('/')">🏠</nuxt-link>
@@ -26,9 +27,7 @@
         /></a>
       </div>
 
-      <div class="left self-end">
-        <LanguageSwitch />
-      </div>
+      <LanguageSwitch />
     </div>
   </header>
 </template>

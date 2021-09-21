@@ -19,8 +19,33 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .prose {
   max-width: unset;
+  h2,
+  h3 {
+    &:before {
+      display: block;
+      content: ' ';
+      margin-top: -40px;
+      height: 40px;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    a:before {
+      content: '#';
+      color: rgb(0, 205, 129);
+      font-weight: 400;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      line-height: 2rem;
+      margin-left: -1.25rem;
+      padding-right: 0.5rem;
+      position: absolute;
+    }
+  }
+  h4 {
+    text-decoration: underline;
+  }
 }
 </style>
