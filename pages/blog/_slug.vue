@@ -47,5 +47,12 @@ export default {
   h4 {
     text-decoration: underline;
   }
+  table {
+    border: 1px solid rgb(223, 217, 217);
+    td,
+    th {
+      text-align: center;
+    }
+  }
 }
 </style>

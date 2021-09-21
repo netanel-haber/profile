@@ -27,6 +27,7 @@ export default {
     }
   }) {
     return $content(`/${locale}/blog`)
+      .sortBy('createdAt', 'desc')
       .fetch()
       .then((posts) =>
         posts.map((p) => ({ ...p, path: p.path.replace(`/${locale}/`, '') }))

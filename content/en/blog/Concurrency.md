@@ -62,11 +62,25 @@ So, CPU bound tasks could use parallel computing to achieve better performance, 
 
 Let's pause to list the terms we've encountered:
 
-<term>CPU-bound</term> <-> <term>I/O-bound</term>;
+<table class="term-table">
+  <thead>
+   <tr>
+      <th colspan="2">Concurrency</td>
+    </tr>
+    <tr>
+      <th>I/O-bound</th>
+      <th>CPU-bound</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Asynchronous Programming</td>
+      <td>Parallel Programming</td>
+    </tr>
+  </tbody>
+</table>
 
-<term>parallel</term> <-> <term>asynchronous</term>.
-
-The last term is <term>concurrency</term>. The rest of this article will discuss real world implementations of concurrent code.
+The rest of this article will discuss real world implementations of concurrent code.
 
 #### Real-world Solutions
 
@@ -109,7 +123,3 @@ You may have noticed the body of this article has been, on the whole, blissfully
 [^3]: Although you would be hard pressed to justify the semantics, based on needle-thin differences between the dictionary definitions of some of the above terms.
 [^4]: I think that for programmers such as I, who have written only consumers - programs that consume computing power - it may be harder to understand this perspective. Once you write a provider, such as an operating system, you suddenly understand this. You own **all** of the resources - so when you parallelize management processes you'll notice you're stepping on your own toes - all of your programs are standing in line for water. Then, you will stop thinking of parallelizing as a free lunch.
 [^5]: We can also quantify CPU usage as energy expenditure to further illustrate the point. There is no "free" energy - to this end, parallelizing CPU-bound programs cannot save energy. Obviously, async code cannot save energy as well - but it **can** minimize wasting energy. The most concise (but, in reality, wrong) framing of this idea is that the ideal program is only bound by CPU usage. Obviously, this program doesn't exist, except in theory. I/O includes loading the next CPU instructions and reading registers as well, for example. In addition, These are not the only two bounds a program may have, for example another very important bound is memory.
-
-```
-
-```
