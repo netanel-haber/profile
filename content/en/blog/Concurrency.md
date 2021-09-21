@@ -6,14 +6,13 @@ date: September 20, 2021
 
 # Concurrency
 
-Does Python have threads?
-Yes. If anyone says otherwise, they have important [standard](https://docs.python.org/3/library/threading.html) Python [modules](https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor) to explain away.
+1. Does Python have threads?
+   **Yes**. If anyone says otherwise, they have important [standard](https://docs.python.org/3/library/threading.html) Python [modules](https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor) to explain away.
+2. Are Python threads useful? **Yes**. [Here are numbers for you to look at](https://replit.com/@NetanelHaber/pythonthreads?v=1).
 
-Are Python threads useful? Yes. [Here are numbers for you to look at](https://replit.com/@NetanelHaber/pythonthreads?v=1).
+3. Can Python threads solve every problem threads are put to use for in languages like C and C++? **No**.
 
-Can Python threads solve every problem threads are put to use for in languages like C and C++? No.
-
-Can multi-processing solve this additional problem set? Not exactly[^1].
+4. Can multi-processing solve this additional problem set? **Not exactly**[^1].
 
 So what is the rule? When is multi-threading useful? Why is Python different than some other languages? As developers, it is useful to know whether different classes of solutions are applicable to a problem. Let's try to understand this, with minimal and gradual use of terminology and language-specific jargon.
 
@@ -40,7 +39,7 @@ So a <term>CPU-bound</term> task is one where the primary performance bottleneck
 
 It is common sense that alleviating performance pain for problems with different bottlenecks will look different for each type of task. This is actually the key to our primary question. assessing the type of work before us - CPU, I/O or a mixture of both - can help us know in advance if certain solutions are applicable.
 
-#### Enhancing Performance
+### Enhancing Performance
 
 So for the first calculation task, we have a discreet list of commands we need to execute. Any unit can only execute one line at a time. We've already mentioned modern computers have many such units. So, for a slow program, the solution is clear - divide and conquer. We divide our computation into smaller coherent parts (so we can assemble the solutions later for the final product), and give each available unit in the computer one part at a time to execute. For example, if we have a computation that can take 8X time, that can be divided into 8 smaller computations that each can take X time - and we have 8 cores - we can now accomplish this task in X time. This means that in order to enhance performance for CPU-bound tasks we need <term>parallelization</term> - computing simultaneously on multiple units.
 
@@ -52,17 +51,13 @@ Consider 10 taps that produce 10L of water an hour. We need 100 liters altogethe
 
 In contrast, optimizing I/O bound programs can actually lessen CPU usage - the problem with I/O bound programs is that they needlessly waste CPU power. In the best case scenario, we can get rid of almost all of the idle CPU time - which can be used to do more work. A clock-cycle saved is a clock-cycle earned[^5].
 
-#### Solutions
-
-#### (There is no such thing as a) "zero-cost-abstraction"
+#### Concurrency
 
 So, CPU bound tasks could use parallel computing to achieve better performance, while for I/O bound tasks we would simply try to do more work while waiting. Generally, the blanket term for any solution for both of these bounds is <term>concurrency</term>. This denotes programs that cannot be thought about sequentially - in order to achieve either solution, the language will now expose syntax and interfaces that, while affording us the performance benefits of concurrent code, prevent us from being able to read our programs "line after line". It will now be possible for different bits of our programs to execute out of order.
 
-#### Reiterating discussed terms
-
 Let's pause to list the terms we've encountered:
 
-<table class="term-table">
+<table>
   <thead>
    <tr>
       <th colspan="2">Concurrency</td>
@@ -80,18 +75,18 @@ Let's pause to list the terms we've encountered:
   </tbody>
 </table>
 
-The rest of this article will discuss real world implementations of concurrent code.
-
-#### Real-world Solutions
+#### Challenges on the way to real-world solutions
 
 As mentioned, different frameworks expose different interfaces to programmers for writing concurrent code. Fundamentally, there are two challenges for language designers:
 
 1. **Implementation** - Developing the actual implementation(s) and mechanism(s) to allow for such code. This is not a trivial problem, especially if existing languages want to introduce new solutions.
 2. **Interface** - Exposing the syntax and high-level tools with which users may interact with the implementations. This is also not a trivial problem - as mentioned, thinking about concurrent code isn't straightforward. Accordingly, a good language will look for interfaces that allow for expressing concurrent code in a readable, easy-to-reason-about way.
 
-Let's give an example for a challenge on the implementation side. Python famously suffers from the <term>[GIL](https://www.youtube.com/watch?v=KVKufdTphKs)</term> - the global interpreter lock. This means that the python interpreter cannot run more than one line of python at any given time. If anything from the previous sections stuck with you, this means that Python effectively bans parallelization, and therefore cannot improve the execution time of CPU-bound programs with concurrency (**Within the same process** - more on this soon). Assuming only one line is running allows you to write nicer underlying implementations. Trouble is, years later suddenly multi-threaded parallelization became very important in all programming. Now, existing Python implementations such as CPython are in trouble because the one-line assumption is fundamentally baked in to the underlying C and lifting the GIL would break the interpreter. The ["Gilectomy"](https://www.youtube.com/watch?v=B_cQ0ykux_4), an attempt to remove the GIL from CPython, has yet to succeed and seems dead.
+Let's give an example for a challenge on the implementation side. Python famously suffers from the <term>[GIL](https://www.youtube.com/watch?v=KVKufdTphKs)</term> - the global interpreter lock. This means that the python interpreter cannot run more than one line of python at any given time. If anything from the previous sections stuck with you, this means that Python effectively bans parallelization (**Within the same process** - more on this soon), and therefore cannot improve the execution time of CPU-bound programs using concurrency[^6].
 
-Let's look at another example for a challenge on the interface side. Javascript, async by default, used to only allow running code asynchronously using callbacks. Basically, we call some async function such as an http request. We would like to continue working though, as explained earlier. So we pass a "callback" to the http request function. This is a function that will run eventually with the result of the async operation and execute some side effect with it, such as changing the page the user is reading. We can then continue our work. This pattern famously suffered from a problem dubbed ["callback hell"](http://callbackhell.com/), where dependent chains of asynchronous calls, which by necessity meant nested callbacks, caused increasing right-indentation of code, until the actual final callback code started on the 100th column, say.
+Let's look at another example for a challenge, this time on the interface side. Javascript, an async language by default, used to only allow running code asynchronously using callbacks functions. These functions are passed to async calls, that will eventually run with the result of async operations and execute side effects, such as changing the page the user is reading. Once we register a callback, we can continue working while the resource fetches.
+
+This pattern famously suffered from a problem dubbed <term>["Callback Hell"](http://callbackhell.com/)</term>, where dependent chains of asynchronous calls, which by necessity meant nested callbacks, caused increasing right-indentation of code, until the actual final callback code started on the 100th column, say.
 
   <pre>
   This
@@ -100,11 +95,17 @@ Let's look at another example for a challenge on the interface side. Javascript,
                                   pleasant
                                                   read.</pre>
 
-Addressing this, Javascript introduced the Promise API. This allows
+Addressing this, JavaScript introduced the [Promise API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)[^7].
 
-#### A Note
+### Solutions
 
-You may have noticed the body of this article has been, on the whole, blissfully clean of mentions of some important words: <term>threads</term>, <term>processes</term>, <term>promises</term> and <term>futures</term>, for example. In addition, languages are mentioned very sparingly. This is on purpose. For a beginner there is so much noise around this area, so many concepts, so much variance between languages and frameworks, that understanding a miracle.
+1. Multiprocessing
+2. Multithreading
+3. Event loop?
+
+### Back to buzzwords
+
+The only way to get <term>parallelization</term> in Python - in order to reduce execution time for <term>CPU-bound</term> programs, is <term>multi-processing</term> (refer to [^1]), because of the <term>GIL</term>. This, by definition, doesn't come with shared memory like <term>multi-threading</term> - so there's a large performance penalty, aside from the enormous resource penalty. This is not to say that threads have no use in Python - they may be used for increasing execution time and reducing CPU usage for <term>I/O bound</term> programs. Another Python-native alternative that can accomplish basically the same thing is the newish [asyncio](https://docs.python.org/3/library/asyncio.html) library, that enabled asynchronous code with a single thread.
 
 ### Ack
 
@@ -122,3 +123,5 @@ You may have noticed the body of this article has been, on the whole, blissfully
 [^3]: Although you would be hard pressed to justify the semantics, based on needle-thin differences between the dictionary definitions of some of the above terms.
 [^4]: I think that for programmers such as I, who have written only consumers - programs that consume computing power - it may be harder to understand this perspective. Once you write a provider, such as an operating system, you suddenly understand this. You own **all** of the resources - so when you parallelize management processes you'll notice you're stepping on your own toes - all of your programs are standing in line for water. Then, you will stop thinking of parallelizing as a free lunch.
 [^5]: We can also quantify CPU usage as energy expenditure to further illustrate the point. There is no "free" energy - to this end, parallelizing CPU-bound programs cannot save energy. Obviously, async code cannot save energy as well - but it **can** minimize wasting energy. The most concise (but, in reality, wrong) framing of this idea is that the ideal program is only bound by CPU usage. Obviously, this program doesn't exist, except in theory. I/O includes loading the next CPU instructions and reading registers as well, for example. In addition, These are not the only two bounds a program may have, for example another very important bound is memory.
+[^6]: Assuming only one line of Python code is running allows the writers of python interpreters to write simpler implementations. Trouble is, years later multi-threaded parallelization became very important in all of programming. Now, existing Python implementations such as CPython are in trouble because the one-line assumption is fundamentally baked in to the underlying C and lifting the GIL would break the interpreter. The ["Gilectomy"](https://www.youtube.com/watch?v=B_cQ0ykux_4), an attempt to remove the GIL from CPython, is a demonstration to that effect.
+[^7]: This allows us to transform nested callbacks into a list, eliminating callback nesting. Not much later, the language introduced a syntactical wrapper for the promise API that uses the <term>await</term> keyword. This is an adoption of [syntax](https://en.wikipedia.org/wiki/Async/await) common to many languages, which enabled giving asynchronous code a synchronous look, therefore arguably improving readability.
