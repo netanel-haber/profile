@@ -108,15 +108,14 @@ You may have noticed the body of this article has been, on the whole, blissfully
 
 ### Ack
 
-#### Stuff I like about async
+**Stuff I like about concurrency:**
 
-1. Great Steve Klabnik talk
-2. Async chapter in eloquent JS
-3. talk on shared memory and multithreading?
+1. Great [talk](<(https://www.youtube.com/watch?v=lJ3NC-R3gSI)>) by Steve Klabnik.
+2. Great [chapter](https://eloquentjavascript.net/11_async.html) about async in eloquentJS, an outstanding book.
 
-#### Friends that helped
+**Friends that helped**
 
-1.  Yoav Tzfati helped me clean up my Python code
+1.  Yoav Tzfati helped clean up my Python code
 
 [^1]: A Python developer friend of mine offered up the following heuristic: If you find yourself reaching for multi-processing in order to incorporate parallel code execution, it's time to choose a different language for this particular task.
 [^2]: For brevity, we also implicitly disregard a further step where parallelism can come in handy - some calculations may perhaps allow for non-sequential execution of certain steps. This doesn't diminish the point, though. Say we've found the most reduced version of the algorithm, split among as many units as possible. We are still left with "hard" work needing to be completed. So we've tried our best to reach a solution in as little time as possible - but we still need to bite the bullet of real work needing to be done.
