@@ -9,7 +9,8 @@
         ><a target="_blank" href="https://pages.github.com/"
           >Github Pages</a
         ></term
-      >. ({{ $t('because') }})
+      >
+      ({{ $t('because') }})
     </div>
   </footer>
 </template>
