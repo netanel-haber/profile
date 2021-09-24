@@ -27,10 +27,13 @@ export default {
     }
   }) {
     return $content(`/${locale}/blog`)
-      .sortBy('createdAt', 'desc')
+      .sortBy('createdAt', 'asc')
       .fetch()
       .then((posts) =>
-        posts.map((p) => ({ ...p, path: p.path.replace(`/${locale}/`, '') }))
+        posts.map((p) => {
+          const path = p.path.replace(/.*\/blog\//, '/blog/')
+          return { ...p, path }
+        })
       )
       .then((posts) => ({ posts }))
   }
