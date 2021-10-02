@@ -9,7 +9,10 @@
               {{ post.title }}
             </nuxt-link>
           </div>
-          <div class="text-xs mb-1">{{ post.date }}</div>
+
+          <div class="text-xs mb-1">
+            {{ post.date }} · <read-time :minutes="post.minutes" />
+          </div>
           <div class="text-sm text-gray-600">{{ post.description }}</div>
         </div>
         <hr />
@@ -27,7 +30,7 @@ export default {
     },
   }) {
     return $content(`/${locale}/blog`)
-      .only(['date', 'description', 'title'])
+      .only(['date', 'description', 'title', 'minutes'])
       .sortBy('order', 'desc')
       .fetch()
       .then((posts) => {

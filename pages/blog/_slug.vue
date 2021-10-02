@@ -1,7 +1,6 @@
 <template>
   <div class="container mx-auto pt-6">
     <article v-if="post">
-      <read-time :content="post"/>
       <nuxt-content class="text-gray-800 prose" :document="post" />
     </article>
   </div>
@@ -14,15 +13,18 @@ export default {
     const { slug } = params
     const post = await $content(`${app.i18n.locale}/blog`, slug).fetch()
     return {
-      post
+      post,
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss">
 .prose {
   max-width: unset;
+  h2 {
+    margin-bottom: 0px;
+  }
   h2,
   h3 {
     &:before {

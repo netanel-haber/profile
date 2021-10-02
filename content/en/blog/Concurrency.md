@@ -5,7 +5,8 @@ date: September 20, 2021
 order: 2
 ---
 
-# Concurrency
+## Concurrency
+<md-read-time :minutes="minutes"></md-read-time>
 
 1. Does Python have threads?
    **Yes**. If anyone says otherwise, they have important [standard](https://docs.python.org/3/library/threading.html) Python [modules](https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor) to explain away.
