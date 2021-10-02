@@ -8,7 +8,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 span {
   @apply text-gray-500 text-base;
 }

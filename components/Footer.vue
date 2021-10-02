@@ -2,15 +2,11 @@
   <footer class="border border-gray-200">
     <div class="max-w-2xl mx-auto py-2">
       {{ $t('written') }}
-      <term> <a target="_blank" href="https://nuxtjs.org/">NuxtJS ❤️</a></term
-      >.
+      <a-out href="https://nuxtjs.org/">NuxtJS ❤️</a-out>.
       {{ $t('hosted') }}
-      <term
-        ><a target="_blank" href="https://pages.github.com/"
-          >Github Pages</a
-        ></term
-      >
-      ({{ $t('because') }})
+      <a-out href="https://pages.github.com/">Github Pages</a-out>. ({{
+        $t('because')
+      }})
     </div>
   </footer>
 </template>
