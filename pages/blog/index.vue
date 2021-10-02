@@ -30,7 +30,7 @@ export default {
     },
   }) {
     return $content(`/${locale}/blog`)
-      .only(['date', 'description', 'title', 'minutes'])
+      .without(['body'])
       .sortBy('order', 'desc')
       .fetch()
       .then((posts) => {
