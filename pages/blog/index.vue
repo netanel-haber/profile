@@ -23,22 +23,20 @@ export default {
   asyncData({
     $content,
     app: {
-      i18n: { locale }
-    }
+      i18n: { locale },
+    },
   }) {
     return $content(`/${locale}/blog`)
+      .only(['date', 'description', 'title'])
       .sortBy('order', 'desc')
       .fetch()
-      .then((posts) =>
-        {
-          console.log(posts);
-          return posts.map((p) => {
-            const path=p.path.replace(/.*\/blog\//, '/blog/')
-            return { ...p, path }
-          })
-        }
-      )
+      .then((posts) => {
+        return posts.map((p) => {
+          const path = p.path.replace(/.*\/blog\//, '/blog/')
+          return { ...p, path }
+        })
+      })
       .then((posts) => ({ posts }))
-  }
+  },
 }
 </script>

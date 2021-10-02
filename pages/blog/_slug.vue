@@ -1,6 +1,7 @@
 <template>
   <div class="container mx-auto pt-6">
     <article v-if="post">
+      <read-time :content="post"/>
       <nuxt-content class="text-gray-800 prose" :document="post" />
     </article>
   </div>
