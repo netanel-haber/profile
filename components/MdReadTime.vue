@@ -10,7 +10,7 @@ export default {
 
 <style scoped>
 span {
-  @apply text-gray-400 text-sm;
+  @apply text-gray-500 text-base;
 }
 </style>
 

@@ -22,7 +22,7 @@ export default {
 <style lang="scss">
 .prose {
   max-width: unset;
-  h2 {
+  h1 {
     margin-bottom: 0px;
   }
   h2,
