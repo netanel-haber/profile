@@ -11,6 +11,6 @@
 <style>
 html,
 body {
-  height: 100%; /*both html and body*/
+  height: 100%;
 }
 </style>

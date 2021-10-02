@@ -2,6 +2,7 @@
 title: TypeScript, TypeSystems and JavaScript
 description: Notepad -> Notepad++
 date: February 27, 2021
+order: 1
 ---
 
 # TypeScript, TypeSystems and JavaScript
