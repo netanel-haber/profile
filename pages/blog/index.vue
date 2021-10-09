@@ -8,6 +8,7 @@
             <nuxt-link class="text-blue-600 text-lg" :to="post.path">
               {{ post.title }}
             </nuxt-link>
+            <span v-if="post.password">🔒</span>
           </div>
 
           <div class="text-xs mb-1">
@@ -34,12 +35,13 @@ export default {
       .sortBy('order', 'desc')
       .fetch()
       .then((posts) => {
-        return posts.map((p) => {
-          const path = p.path.replace(/.*\/blog\//, '/blog/')
-          return { ...p, path }
-        })
+        return {
+          posts: posts.map((p) => {
+            const path = p.path.replace(/.*\/blog\//, '/blog/')
+            return { ...p, path }
+          }),
+        }
       })
-      .then((posts) => ({ posts }))
   },
 }
 </script>
