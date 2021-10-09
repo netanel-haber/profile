@@ -30,6 +30,7 @@ export default {
   },
   computed: {
     locked() {
+      if (process.env.NODE_ENV === 'development') return false
       if (!this.post?.password) return false
       return this.post.password !== this.value
     },
