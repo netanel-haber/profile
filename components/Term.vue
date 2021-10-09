@@ -5,6 +5,8 @@
 </template>
 <style scoped lang="postcss">
 .term {
-  @apply bg-blue-50 cursor-default p-0.5 mx-0.5 border rounded text-sm font-sans;
+  background-color: rgba(196, 255, 100, 0.3);
+  font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
+  @apply cursor-default px-1 rounded;
 }
 </style>
