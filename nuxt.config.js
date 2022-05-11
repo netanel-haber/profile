@@ -11,14 +11,19 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      {
+        src: "static.getclicky.com/101366055.js",
+        async: true,
+      }
+    ]
   },
   css: [],
   plugins: ['~/plugins/i18n.js'],
   components: true,
   buildModules: [
     '@nuxt/typescript-build',
-    '@nuxtjs/google-analytics',
     '@nuxtjs/tailwindcss'
   ],
 
@@ -32,12 +37,7 @@ export default {
       }
     }
   },
-
   modules: ['@nuxtjs/axios', '@nuxt/content', '@nuxtjs/i18n'],
-
-  googleAnalytics: {
-    id: 'G-H4EDVS6F23'
-  },
   i18n: {
     locales: [
       { code: 'en', name: '🇺🇸', dir: 'ltr' },
