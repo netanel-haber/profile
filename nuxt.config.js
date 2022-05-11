@@ -14,7 +14,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [
       {
-        src: "static.getclicky.com/101366055.js",
+        src: "/static.getclicky.com/101366055.js",
         async: true,
       }
     ]
