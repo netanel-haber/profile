@@ -20,7 +20,7 @@ export default {
     ]
   },
   css: [],
-  plugins: ['~/plugins/i18n.js'],
+  plugins: ['~/plugins/i18n.js', '~/plugins/disqus'],
   components: true,
   buildModules: [
     '@nuxt/typescript-build',

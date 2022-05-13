@@ -10,6 +10,10 @@
     <article :class="{ invisible: locked }">
       <nuxt-content class="text-gray-800 prose" :document="post" />
     </article>
+    <hr />
+    <div class="comments my-10">
+      <Disqus />
+    </div>
   </div>
 </template>
 
