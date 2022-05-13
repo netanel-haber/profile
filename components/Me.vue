@@ -5,7 +5,7 @@
     {{ $t('email') }}:
 
     <a class="text-blue-500" href="mailto:netanel.t.haber@gmail.com"
-      >netanel.t.haber@gmail.com</a
+      >netanel.devblog@gmail.com </a
     >.
   </span>
 </template>
