@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{347:function(n,e,d){"use strict";d.r(e);var t={name:"Index",fetch:function(n){(0,n.redirect)("/blog")}},c=d(19),component=Object(c.a)(t,undefined,undefined,!1,null,null,null);e.default=component.exports}}]);
