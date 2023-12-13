@@ -20,7 +20,6 @@ export default {
     ]
   },
   css: [],
-  plugins: ['~/plugins/i18n.js', '~/plugins/disqus'],
   components: true,
   buildModules: [
     '@nuxt/typescript-build',
@@ -37,16 +36,5 @@ export default {
       }
     }
   },
-  modules: ['@nuxtjs/axios', '@nuxt/content', '@nuxtjs/i18n'],
-  i18n: {
-    locales: [
-      { code: 'en', name: '🇺🇸', dir: 'ltr' },
-      { code: 'he', name: '🇮🇱', dir: 'rtl' }
-    ],
-    vueI18nLoader: true,
-    defaultLocale: 'en',
-    vueI18n: {
-      fallbackLocale: 'en'
-    }
-  }
+  modules: ['@nuxtjs/axios', '@nuxt/content'],
 }

@@ -1,5 +1,5 @@
 <template>
-  <span>{{ minutes }} {{ $t('readingTime') }}</span>
+  <span>{{ minutes }} min read</span>
 </template>
 
 <script>
@@ -9,10 +9,3 @@ export default {
   },
 }
 </script>
-
-<i18n lang="yaml">
-he: 
-    readingTime: דקות קריאה
-en:
-    readingTime: min read
-</18n>

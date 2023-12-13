@@ -24,13 +24,8 @@
 
 <script>
 export default {
-  asyncData({
-    $content,
-    app: {
-      i18n: { locale },
-    },
-  }) {
-    return $content(`/${locale}/blog`)
+  asyncData({$content}) {
+    return $content(`/en/blog`)
       .without(['body'])
       .sortBy('order', 'desc')
       .fetch()

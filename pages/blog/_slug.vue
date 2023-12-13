@@ -10,19 +10,15 @@
     <article :class="{ invisible: locked }">
       <nuxt-content class="text-gray-800 prose" :document="post" />
     </article>
-    <hr />
-    <div class="comments my-10">
-      <Disqus />
-    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Post',
-  async asyncData({ $content, params, app }) {
+  async asyncData({ $content, params }) {
     const { slug } = params
-    const post = await $content(`${app.i18n.locale}/blog`, slug).fetch()
+    const post = await $content(`/en/blog`, slug).fetch()
     return {
       post,
     }

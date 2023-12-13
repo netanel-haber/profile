@@ -12,7 +12,7 @@
         h-9
       "
     >
-      <nuxt-link class="text-2xl" :to="localePath('/')">🏠</nuxt-link>
+      <nuxt-link class="text-2xl" :to="'/'">🏠</nuxt-link>
       <div class="flex gap-3 items-center">
         <a-out href="https://stackoverflow.com/users/12473000/notepadninja">
           <img src="/stackoverflow.png" width="27" alt="" />
@@ -24,15 +24,6 @@
           <img src="/linkedin.png" width="24" alt="" />
         </a-out>
       </div>
-
-      <LanguageSwitch />
     </div>
   </header>
 </template>
-
-<i18n lang="yaml">
-he:
-  blog: הבלוג שלי
-en:
-  blog: My Blog
-</i18n>
