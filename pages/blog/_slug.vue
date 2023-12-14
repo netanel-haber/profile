@@ -18,7 +18,7 @@ export default {
   name: 'Post',
   async asyncData({ $content, params }) {
     const { slug } = params
-    const post = await $content(`/en/blog`, slug).fetch()
+    const post = await $content(`/blog`, slug).fetch()
     return {
       post,
     }

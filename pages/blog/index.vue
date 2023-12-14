@@ -25,7 +25,7 @@
 <script>
 export default {
   asyncData({$content}) {
-    return $content(`/en/blog`)
+    return $content(`/blog`)
       .without(['body'])
       .sortBy('order', 'desc')
       .fetch()
