@@ -4,7 +4,6 @@
     <div class="p-6 bg-white w-full max-w-2xl mx-auto my-5 rounded flex-1">
       <Nuxt />
     </div>
-    <Footer />
   </div>
 </template>
 
