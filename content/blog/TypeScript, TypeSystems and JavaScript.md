@@ -6,7 +6,6 @@ order: 1
 ---
 
 # TypeScript, TypeSystems and JavaScript
-<md-read-time :minutes="minutes"></md-read-time>
 
 ## Buzzwords
 

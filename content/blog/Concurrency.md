@@ -6,7 +6,6 @@ order: 2
 ---
 
 # Concurrency
-<md-read-time :minutes="minutes"></md-read-time>
 
 This article aims to explain basic concepts related to concurrency, which is used to solve performance related problems. It starts and ends with Python (CPython, mostly), as a tie from and back into reality - but isn't really about Python at all. Actually, it isn't about any language, framework or library in particular. It aims to take a step back from questions of application and start from first principles.
 

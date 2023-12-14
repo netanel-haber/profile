@@ -25,16 +25,5 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/tailwindcss'
   ],
-
-  hooks: {
-    'content:file:beforeInsert': (document) => {
-      if (document.extension === '.md') {
-        const { minutes } = require('reading-time')(document.text, {
-          wordsPerMinute: 265,
-        })
-        document.minutes = Math.ceil(minutes)
-      }
-    }
-  },
   modules: ['@nuxtjs/axios', '@nuxt/content'],
 }

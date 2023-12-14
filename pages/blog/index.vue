@@ -11,9 +11,6 @@
             <span v-if="post.password">🔒</span>
           </div>
 
-          <div class="text-xs mb-1">
-            {{ post.date }} · <read-time :minutes="post.minutes" />
-          </div>
           <div class="text-sm text-gray-600">{{ post.description }}</div>
         </div>
         <hr />
