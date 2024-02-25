@@ -26,28 +26,28 @@ export default {
   data: () => ({
     posts: [
       {
-        "slug": "Concurrency",
-        "description": "Yes, Python has threads (*Sigh*)",
-        "title": "Concurrency",
-        "date": "September 20, 2021",
-        "order": 2,
-        "dir": "/blog",
-        "path": "/blog/Concurrency",
-        "extension": ".md",
-        "createdAt": "2024-02-25T18:59:40.332Z",
-        "updatedAt": "2024-02-25T18:59:40.332Z"
+        slug: "Concurrency",
+        description: "Yes, Python has threads (*Sigh*)",
+        title: "Concurrency",
+        date: "September 20, 2021",
+        order: 2,
+        dir: "/blog",
+        path: "/blog/Concurrency",
+        extension: ".md",
+        createdAt: "2024-02-25T18:59:40.332Z",
+        updatedAt: "2024-02-25T18:59:40.332Z"
       },
       {
-        "slug": "TypeScript, TypeSystems and JavaScript",
-        "description": "Notepad -> Notepad++",
-        "title": "TypeScript, TypeSystems and JavaScript",
-        "date": "February 27, 2021",
-        "order": 1,
-        "dir": "/blog",
-        "path": "/blog/TypeScript, TypeSystems and JavaScript",
-        "extension": ".md",
-        "createdAt": "2024-02-25T18:59:40.333Z",
-        "updatedAt": "2024-02-25T18:59:40.333Z"
+        slug: "TypeScript, TypeSystems and JavaScript",
+        description: "Notepad -> Notepad++",
+        title: "TypeScript, TypeSystems and JavaScript",
+        date: "February 27, 2021",
+        order: 1,
+        dir: "/blog",
+        path: "/blog/TypeScript, TypeSystems and JavaScript",
+        extension: ".md",
+        createdAt: "2024-02-25T18:59:40.333Z",
+        updatedAt: "2024-02-25T18:59:40.333Z"
       }
     ]
   })
