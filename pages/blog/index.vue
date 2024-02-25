@@ -27,9 +27,14 @@
           src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg"
           class="w-full h-auto p-2" />
       </a-out>
+      <a-out href="https://www.netanel.dev/talor-wiki"
+        style="background-image: radial-gradient(circle, #d6cab9 20%, #8da7b9 60%, #2d5f73 100%);"
+        class="flex flex-1 flex-col w-30 rounded-md p-1 justify-between shadow-inner">
+        <span class="text-white mb-2 text-center">Friend Reaches 500 Wiki Edits</span>
+        <img style="box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);" src="/globe.png" class="w-full h-auto p-2" />
+      </a-out>
     </section>
     <hr />
-    <!-- <iframe height="100vh" src="https://netanel-haber.github.io/checkers/"></iframe> -->
     <section class="flex flex-col gap-10">
       <article v-for="(post, $index) in posts" :key="`post-${$index}`">
         <div class="p-1">
