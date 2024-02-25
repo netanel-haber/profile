@@ -1,13 +1,6 @@
 <template>
   <div class="container mx-auto pt-6">
-    <nice-input
-      v-if="locked"
-      :value="value"
-      focus-on-mount
-      placeholder="password"
-      @input="value = $event"
-    />
-    <article :class="{ invisible: locked }">
+    <article>
       <nuxt-content class="text-gray-800 prose" :document="post" />
     </article>
   </div>
@@ -27,13 +20,6 @@ export default {
     return {
       value: '',
     }
-  },
-  computed: {
-    locked() {
-      if (process.env.NODE_ENV === 'development') return false
-      if (!this.post?.password) return false
-      return this.post.password !== this.value
-    },
   },
 }
 </script>
