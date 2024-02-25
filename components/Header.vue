@@ -1,5 +1,5 @@
 <template>
-  <header class="topnav h-54px p-2 border-b-2 border-gray-200 bg-white">
+  <header class="topnav h-54px p-2 bg-white">
     <div
       class="
         container
@@ -25,5 +25,6 @@
         </a-out>
       </div>
     </div>
+    <hr/>
   </header>
 </template>

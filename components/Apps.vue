@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-2">
+        <section class="grid grid-cols-2 sm:grid-cols-4 gap-1 p-2">
             <button v-for="(app, index) in apps" :key="index"
                 class="flex flex-1 flex-col w-full rounded-md p-1 justify-between shadow-inner" @click="toggleIframe(index)"
                 :style="{ backgroundImage: app.background }">

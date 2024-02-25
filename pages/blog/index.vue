@@ -1,13 +1,9 @@
 <template>
   <div class="mx-auto flex flex-col gap-2">
-    <span class="p-2 border bg-neutral-100 text-neutral-600 mb-7">
-      My name is Netanel Haber, I do ML/MLOps/FullStack/DevOps yada yada, I work here: <a-out class="text-blue-600"
-        href="https://deci.ai/">Deci AI</a-out>
+    <span class="py-2 bg-neutral-100 text-neutral-600 mb-2">
+      My name is Netanel Haber, I do ML/MLOps/FullStack/DevOps.
     </span>
-    <hr />
-    <apps/>
-    <hr />
-    <section class="flex flex-col gap-10">
+    <section class="mb-3 flex flex-col gap-3">
       <article v-for="(post, $index) in posts" :key="`post-${$index}`">
         <div class="p-1">
           <div class="mb-2">
@@ -21,6 +17,7 @@
         <hr />
       </article>
     </section>
+    <apps/>
   </div>
 </template>
 
