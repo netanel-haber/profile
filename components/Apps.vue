@@ -19,7 +19,7 @@ export default {
                     name: 'Vanilla TS Checkers',
                     href: 'https://netanel-haber.github.io/checkers/',
                     background: 'linear-gradient(rgba(115, 104, 122, 0.709), rgb(93, 20, 133))',
-                    image: '/checkers.png',
+                    image: '/checkers.webp',
                     height: "90vh"
                 },
                 {
@@ -40,7 +40,7 @@ export default {
                     name: 'Friend Reaches 500 Wiki Edits',
                     href: 'https://www.netanel.dev/talor-wiki',
                     background: 'radial-gradient(circle, #d6cab9 20%, #8da7b9 60%, #2d5f73 100%)',
-                    image: '/globe.png',
+                    image: '/globe.webp',
                     height: '850px'
                 }
             ],

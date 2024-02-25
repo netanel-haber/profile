@@ -15,13 +15,13 @@
       <nuxt-link class="text-2xl" :to="'/'">🏠</nuxt-link>
       <div class="flex gap-3 items-center">
         <a-out href="https://stackoverflow.com/users/12473000/notepadninja">
-          <img src="/stackoverflow.png" width="27" alt="" />
+          <img src="/stackoverflow.webp" width="27" alt="" />
         </a-out>
         <a-out href="https://github.com/netanel-haber/profile">
-          <img src="/github.png" width="25" alt="" />
+          <img src="/github.webp" width="25" alt="" />
         </a-out>
         <a-out href="https://www.linkedin.com/in/netanel-haber/">
-          <img src="/linkedin.png" width="24" alt="" />
+          <img src="/linkedin.webp" width="24" alt="" />
         </a-out>
       </div>
     </div>
