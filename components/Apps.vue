@@ -1,13 +1,15 @@
 <template>
-    <section class="flex flex-wrap gap-4 p-2">
-        <button v-for="(app, index) in apps" :key="index"
-            class="flex flex-1 flex-col w-30 rounded-md p-1 justify-between shadow-inner" @click="toggleIframe(index)"
-            :style="{ backgroundImage: app.background }">
-            <span class="text-white mb-2 text-center">{{ app.name }}</span>
-            <img :src="app.image" class="w-full h-auto p-2" style="box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);" />
-        </button>
-        <iframe id="app" :style="{height: apps[activeIframe].height}" v-if="activeIframe !== null" :src="apps[activeIframe].href"></iframe>
-    </section>
+    <div>
+        <section class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-2">
+            <button v-for="(app, index) in apps" :key="index"
+                class="flex flex-1 flex-col w-full rounded-md p-1 justify-between shadow-inner" @click="toggleIframe(index)"
+                :style="{ backgroundImage: app.background }">
+                <span class="text-white mb-2 text-center">{{ app.name }}</span>
+                <img :src="app.image" class="w-full h-auto p-2" style="box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);" />
+            </button>
+        </section>
+        <iframe id="app" :style="{ height: apps[activeIframe].height }" v-if="activeIframe !== null" :src="apps[activeIframe].href"></iframe>
+    </div>
 </template>
   
 <script>
@@ -51,9 +53,9 @@ export default {
         toggleIframe(index) {
             this.activeIframe = this.activeIframe === index ? null : index;
             const frame = document.getElementById("app");
-            if(frame) {
-                frame.scrollIntoView({behavior:'smooth'})
-            } 
+            if (frame) {
+                frame.scrollIntoView({ behavior: 'smooth' })
+            }
         }
     }
 };
