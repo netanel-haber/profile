@@ -24,7 +24,6 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true,
   },
-  css: ['./assets/main.css'],
   routeRules: {
     '/': { redirect: '/blog' },
   },
