@@ -1,17 +1,11 @@
 <template>
   <div class="container mx-auto pt-6">
     <article>
-      <ContentRenderer :value="data" />
+        <ContentDoc class="text-gray-800 prose" />
     </article>
   </div>
 </template>
 
-
-<script setup lang="ts">
-const route = useRoute()
-
-const { data } = await useAsyncData('get-document', () => queryContent(route.path).findOne())
-</script>
 
 <style>
 .prose {
