@@ -1,7 +1,7 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-  head: {
+  $meta: {
     title: 'Netanel',
     htmlAttrs: {
       lang: 'en',
@@ -20,25 +20,12 @@ export default defineNuxtConfig({
       },
     ],
   },
-  css: [],
-  components: true,
-  modules: ['@nuxt/content'],
+  modules: ['@nuxt/content', '@nuxtjs/tailwindcss'],
   typescript: {
     typeCheck: true,
   },
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
+  css: ['./assets/main.css'],
+  routeRules: {
+    '/': { redirect: '/blog' },
   },
-  content: [
-    "./components/**/*.{js,vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./app.vue",
-    "./error.vue",
-  ],
-  css: ['~/assets/css/main.css'],
 })

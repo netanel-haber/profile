@@ -1,27 +1,16 @@
 <template>
   <div class="container mx-auto pt-6">
     <article>
-      <nuxt-content class="text-gray-800 prose" :document="post" />
+      <ContentRenderer :value="data" />
     </article>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Post',
-  async asyncData({ $content, params }) {
-    const { slug } = params
-    const post = await $content(`/blog`, slug).fetch()
-    return {
-      post,
-    }
-  },
-  data() {
-    return {
-      value: '',
-    }
-  },
-}
+
+<script setup lang="ts">
+const route = useRoute()
+
+const { data } = await useAsyncData('get-document', () => queryContent(route.path).findOne())
 </script>
 
 <style>
