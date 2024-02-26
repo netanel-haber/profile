@@ -4,49 +4,19 @@
       <article v-for="(post, $index) in posts" :key="`post-${$index}`">
         <div class="p-1">
           <div class="mb-2">
-            <nuxt-link class="text-blue-600 text-lg" :to="post.path">
+            <nuxt-link class="text-blue-600 text-lg" :to="post._path">
               {{ post.title }}
             </nuxt-link>
-            <span v-if="post.password">🔒</span>
           </div>
           <div class="text-sm text-gray-600">{{ post.description }}</div>
         </div>
         <hr />
       </article>
     </section>
-    <apps/>
+    <apps />
   </div>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    posts: [
-      {
-        slug: "Concurrency",
-        description: "Yes, Python has threads (*Sigh*)",
-        title: "Concurrency",
-        date: "September 20, 2021",
-        order: 2,
-        dir: "/blog",
-        path: "/blog/Concurrency",
-        extension: ".md",
-        createdAt: "2024-02-25T18:59:40.332Z",
-        updatedAt: "2024-02-25T18:59:40.332Z"
-      },
-      {
-        slug: "TypeScript, TypeSystems and JavaScript",
-        description: "Notepad -> Notepad++",
-        title: "TypeScript, TypeSystems and JavaScript",
-        date: "February 27, 2021",
-        order: 1,
-        dir: "/blog",
-        path: "/blog/TypeScript, TypeSystems and JavaScript",
-        extension: ".md",
-        createdAt: "2024-02-25T18:59:40.333Z",
-        updatedAt: "2024-02-25T18:59:40.333Z"
-      }
-    ]
-  })
-}
+<script setup>
+const posts = await queryContent("/blog").find()
 </script>
