@@ -2,13 +2,19 @@
     <div>
         <section class="grid grid-cols-2 sm:grid-cols-4 gap-1 p-2">
             <button v-for="(app, index) in apps" :key="index"
-                class="flex flex-1 flex-col w-full rounded-md p-1 justify-between shadow-inner" @click="toggleIframe(index)"
-                :style="{ backgroundImage: app.background }">
-                <span class="text-white mb-2 text-center">{{ app.name }}</span>
-                <img :src="app.image" class="w-full h-auto p-2" style="box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);" />
+                class="flex flex-1 flex-col w-full rounded-md p-1 justify-between" @click="toggleIframe(index)"
+                :aria-label="app.name" :style="{ backgroundImage: app.background }"
+                :aria-pressed="activeIframe === index ? true : false">
+                <img :src="app.image" class="w-full h-auto p-1"
+                    :style="{ boxShadow: activeIframe === index ? 'rgba(0, 0, 0, 0.75) 3px 3px 6px -1px' : 'unset' }" />
             </button>
         </section>
-        <iframe id="app" :style="{ height: apps[activeIframe].height }" v-if="activeIframe !== null" :src="apps[activeIframe].href"></iframe>
+        <div class="border py-2 my-1" v-if="activeIframe !== null">
+            <h4 class="mb-2 text-center">{{ apps[activeIframe].name }}</h4>
+            <iframe class="w-full" allow="clipboard-write" :style="{ height: apps[activeIframe].height }"
+                :src="apps[activeIframe].href"></iframe>
+        </div>
+
     </div>
 </template>
   
@@ -54,16 +60,10 @@ export default {
             this.activeIframe = this.activeIframe === index ? null : index;
             const frame = document.getElementById("app");
             if (frame) {
-                frame.scrollIntoView({ behavior: 'smooth' })
+                frame.scrollIntoView(true)
             }
         }
     }
 };
 </script>
-<style scoped>
-iframe {
-    border: 1px solid green;
-    width: 100%;
-}
-</style>
   

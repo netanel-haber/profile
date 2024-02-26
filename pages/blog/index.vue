@@ -1,8 +1,5 @@
 <template>
-  <div class="mx-auto flex flex-col gap-2">
-    <span class="py-2 bg-neutral-100 text-neutral-600 mb-2">
-      My name is Netanel Haber, I do ML/MLOps/FullStack/DevOps.
-    </span>
+  <div class="mx-auto flex flex-col">
     <section class="mb-3 flex flex-col gap-3">
       <article v-for="(post, $index) in posts" :key="`post-${$index}`">
         <div class="p-1">

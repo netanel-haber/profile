@@ -12,7 +12,7 @@
         h-9
       "
     >
-      <nuxt-link class="text-2xl" :to="'/'">🏠</nuxt-link>
+      <nuxt-link class="text-l" :to="'/'">Netanel Haber's 🏠 Thingy</nuxt-link>
       <div class="flex gap-3 items-center">
         <a-out href="https://stackoverflow.com/users/12473000/notepadninja">
           <img src="/stackoverflow.webp" width="27" alt="" />
