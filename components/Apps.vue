@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="grid grid-cols-2 sm:grid-cols-4 gap-1 p-2">
+        <section class="grid grid-cols-3 sm:grid-cols-5 gap-1 p-2">
             <button v-for="app in apps" :key="app.name" class="flex flex-1 flex-col w-full rounded-md p-1 justify-between"
                 @click="toggleIframe(app)" :aria-label="app.name" :style="{ backgroundImage: app.background }"
                 :aria-pressed="isActive(app)">
@@ -8,9 +8,8 @@
                     :style="{ boxShadow: isActive(app) ? 'rgba(0, 0, 0, 0.75) 3px 3px 6px -1px' : 'unset' }" />
             </button>
         </section>
-        <section class="border py-2 my-1" v-if="activeApp">
-            <h4 class="mb-2 text-center">{{ activeApp.name }}</h4>
-            <iframe class="w-full" allow="clipboard-write" :style="{ height: activeApp.height }"
+        <section v-if="activeApp">
+            <iframe :key="activeApp.name" class="w-full my-4 border" allow="clipboard-write" :style="{ height: activeApp.height }"
                 :src="activeApp.href"></iframe>
         </section>
     </div>
@@ -24,6 +23,13 @@ const apps = [
         background: 'linear-gradient(rgba(115, 104, 122, 0.709), rgb(93, 20, 133))',
         image: '/checkers.webp',
         height: "90vh"
+    },
+    {
+        name: 'Resume',
+        href: 'https://www.netanel.dev/resume.pdf',
+        background: 'linear-gradient(rgba(115, 104, 122, 0.709), rgb(93, 20, 133))',
+        image: '/resume.webp',
+        height: '850px'
     },
     {
         name: 'My ChatGPT Custom Instructions',
