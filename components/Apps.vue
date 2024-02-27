@@ -27,7 +27,7 @@ const apps = [
     {
         name: 'Resume',
         href: 'https://www.netanel.dev/resume.pdf',
-        background: 'linear-gradient(rgba(115, 104, 122, 0.709), rgb(93, 20, 133))',
+        background: 'radial-gradient(circle, rgba(67,149,162,0.7570621468926554) 7%, rgba(249,212,72,0.8418079096045198) 45%, rgba(124,166,85,0.9491525423728814) 100%)',
         image: '/resume.webp',
         height: '850px'
     },
