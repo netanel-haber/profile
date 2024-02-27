@@ -14,7 +14,6 @@
             <iframe class="w-full" allow="clipboard-write" :style="{ height: apps[activeIframe].height }"
                 :src="apps[activeIframe].href"></iframe>
         </div>
-
     </div>
 </template>
   
