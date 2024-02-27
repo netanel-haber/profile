@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto flex flex-col">
+  <main class="mx-auto flex flex-col">
     <section class="mb-3 flex flex-col gap-3">
       <article>
         <div class="p-1">
@@ -25,5 +25,5 @@
       </article>
     </section>
     <apps />
-  </div>
+  </main>
 </template>
