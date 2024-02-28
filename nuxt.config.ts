@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
   routeRules: {
+    '/blog/': { redirect: '/' },
     '/blog/concurrency': { redirect: '/concurrency' },
     '/blog/typescript-typesystems-and-javascript': { redirect: '/typescript-typesystems-and-javascript' },
   },
