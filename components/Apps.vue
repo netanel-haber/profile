@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="grid grid-cols-3 sm:grid-cols-5 gap-1 p-2">
+        <section class="grid grid-cols-3 gap-1 p-2">
             <button v-for="app in apps" :key="app.hash" class="flex flex-1 flex-col w-full rounded-md p-1 justify-between"
                 @click="toggleIframe(app)" :aria-label="app.name" :style="{ backgroundImage: app.background }"
                 :aria-pressed="isActive(app)">
@@ -24,19 +24,26 @@ const apps = Object.entries({
         image: '/checkers.webp',
         height: "90vh",
     },
-    resume: {
-        name: 'Resume',
-        href: 'https://www.netanel.dev/resume.pdf',
-        background: 'radial-gradient(circle, rgba(67,149,162,0.7570621468926554) 7%, rgba(249,212,72,0.8418079096045198) 45%, rgba(124,166,85,0.9491525423728814) 100%)',
-        image: '/resume.webp',
-        height: '850px',
-    },
     chatgpt: {
         name: 'My ChatGPT Custom Instructions',
         href: 'https://netanel-haber.github.io/chatgpt-custom-instructions/',
         background: 'radial-gradient(circle, rgb(216, 200, 200) 0%, #00a67fae 100%)',
         image: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
         height: "950px",
+    },
+    nyan: {
+        name: 'Tiny React Infinite Scroll',
+        href: "https://codesandbox.io/embed/78wnx?view=preview&module=%2Fsrc%2Fuseinfinitescroll.js&hidenavigation=1",
+        background: 'radial-gradient(circle, #d6cab9 20%, #8da7b9 60%, #2d5f73 100%)',
+        image: '/nyan.gif',
+        height: '500px',
+    },
+    resume: {
+        name: 'Resume',
+        href: 'https://www.netanel.dev/resume.pdf',
+        background: 'radial-gradient(circle, rgba(67,149,162,0.7570621468926554) 7%, rgba(249,212,72,0.8418079096045198) 45%, rgba(124,166,85,0.9491525423728814) 100%)',
+        image: '/resume.webp',
+        height: '850px',
     },
     password: {
         name: 'Chrome Strong Password Generator',
@@ -52,13 +59,6 @@ const apps = Object.entries({
         image: '/globe.webp',
         height: '850px',
     },
-    nyan: {
-        name: 'Tiny React Infinite Scroll',
-        href: "https://codesandbox.io/embed/78wnx?view=preview&module=%2Fsrc%2Fuseinfinitescroll.js&hidenavigation=1",
-        background: 'radial-gradient(circle, #d6cab9 20%, #8da7b9 60%, #2d5f73 100%)',
-        image: '/nyan.gif',
-        height: '500px',
-    }
 }).map(([hash, properties]) => ({ ...properties, hash }));
 
 type App = typeof apps[number];
