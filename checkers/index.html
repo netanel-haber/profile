@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Redirecting to checkers...</title>
+    <meta name="description" content="Redirecting to the Checkers game by Netanel Haber." />
+    <link rel="canonical" href="https://netanel-haber.github.io/checkers/" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content="0; URL='https://netanel-haber.github.io/checkers/'" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: auto;
+            background-image: linear-gradient(rgba(73, 85, 80, 0.92), #33234d);
+            color: white;
+        }
+
+        #redirect-text {
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                document.getElementById("redirect-text").style.display = "block";
+            }, 1000);
+        };
+    </script>
+</head>
+
+<body>
+    <div id="redirect-text">
+        If you are not redirected automatically, follow this <a href='https://netanel-haber.github.io/checkers/'>link to
+            checkers</a>.
+    </div>
+</body>
+
+</html>
