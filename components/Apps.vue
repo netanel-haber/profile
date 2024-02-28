@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="grid grid-cols-3 gap-1 p-2">
-            <button v-for="app in apps" :key="app.hash" class="flex flex-1 flex-col w-full rounded-md p-1 justify-between"
+            <button v-for="app in apps" :key="app.hash" :class="app.class" class="flex flex-1 flex-col w-full rounded-md p-1 justify-between"
                 @click="toggleIframe(app)" :aria-label="app.name" :style="{ backgroundImage: app.background }"
                 :aria-pressed="isActive(app)">
                 <img :src="app.image" class="w-full h-auto p-1"
@@ -34,9 +34,10 @@ const apps = Object.entries({
     nyan: {
         name: 'Tiny React Infinite Scroll',
         href: "https://codesandbox.io/embed/78wnx?view=preview&module=%2Fsrc%2Fuseinfinitescroll.js&hidenavigation=1",
-        background: 'radial-gradient(circle, #d6cab9 20%, #8da7b9 60%, #2d5f73 100%)',
+        background: 'linear-gradient(60deg, #ff0084, #ffce00, #29adff, #ff77a8, #ffccaa)',
         image: '/nyan.gif',
         height: '500px',
+        class: "nyan"
     },
     resume: {
         name: 'Resume',
@@ -81,3 +82,21 @@ onMounted(() => {
 })
 
 </script>
+
+<style scoped>
+@keyframes nyan-cat-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.nyan {
+    background-size: 600% 600%;
+    animation: nyan-cat-animation 5s linear infinite;
+}
+</style>
+  
