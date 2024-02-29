@@ -22,7 +22,7 @@ const apps = Object.entries({
         href: 'https://netanel-haber.github.io/checkers/',
         background: 'linear-gradient(rgba(115, 104, 122, 0.709), rgb(93, 20, 133))',
         image: '/checkers.webp',
-        height: "90vh",
+        height: "775px",
     },
     chatgpt: {
         name: 'My ChatGPT Custom Instructions',
