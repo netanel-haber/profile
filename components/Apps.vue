@@ -1,10 +1,10 @@
 <template>
     <div>
-        <section class="grid grid-cols-3 gap-1 p-2">
-            <button v-for="app in apps" :key="app.hash" :class="app.class" class="flex flex-1 flex-col w-full rounded-md p-1 justify-between"
+        <section class="flex gap-2 p-1 flex-wrap justify-center">
+            <button v-for="app in apps" :key="app.hash" :class="app.class" class="w-[135px] h-[135px] rounded-md"
                 @click="toggleIframe(app)" :aria-label="app.name" :style="{ backgroundImage: app.background }"
                 :aria-pressed="isActive(app)">
-                <img :src="app.image" class="w-full h-auto p-1"
+                <img :src="app.image" class="w-full h-full p-1 rounded-md"
                     :style="{ boxShadow: isActive(app) ? 'rgba(0, 0, 0, 0.75) 3px 3px 6px -1px' : 'unset' }" />
             </button>
         </section>
@@ -55,10 +55,17 @@ const apps = Object.entries({
     },
     wiki: {
         name: 'Friend Reaches 500 Wiki Edits',
-        href: 'https://www.netanel.dev/talor-wiki',
+        href: '/talor-wiki.html',
         background: 'radial-gradient(circle, #d6cab9 20%, #8da7b9 60%, #2d5f73 100%)',
         image: '/globe.webp',
         height: '850px',
+    },
+    "mac-apps": {
+        name: 'Friend Reaches 500 Wiki Edits',
+        href: '/mac-apps.html',
+        background: 'linear-gradient(90deg, rgb(240 238 234) 46%, rgb(141, 167, 185) 54%, rgb(55 144 179) 100%)',
+        image: '/mac-logo.png',
+        height: '315px',
     },
 }).map(([hash, properties]) => ({ ...properties, hash }));
 
