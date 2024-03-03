@@ -65,7 +65,7 @@ const apps = Object.entries({
         href: '/mac-apps.html',
         background: 'linear-gradient(90deg, rgb(240 238 234) 46%, rgb(141, 167, 185) 54%, rgb(55 144 179) 100%)',
         image: '/mac-logo.png',
-        height: '315px',
+        height: '375px',
     },
 }).map(([hash, properties]) => ({ ...properties, hash }));
 
