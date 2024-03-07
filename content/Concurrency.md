@@ -1,16 +1,8 @@
----
-title: Concurrency
-description: Yes, Python has threads (*Sigh*)
-date: September 20, 2021
-order: 2
----
-
-# Concurrency
+## Concurrency
 
 This article aims to explain basic concepts related to concurrency, which is used to solve performance related problems. It starts and ends with Python (CPython, mostly), as a tie from and back into reality - but isn't really about Python at all. Actually, it isn't about any language, framework or library in particular. It aims to take a step back from questions of application and start from first principles.
 
 Let's start by stating some facts about python concurrency. They may seem contradictory or confusing - the rest of the article aims to provide more clarity as to how they make sense together. It should be noted that some of these facts pertain to a standard use of Python - it is possible to bypass some limitations, either by using a less popular Python implementation, or by using non-standard [tools](https://numba.pydata.org/) and libraries.
-
 
 1. **Python has threads.**
    If anyone says otherwise, they have important [standard](https://docs.python.org/3/library/threading.html) Python [modules](https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor) to explain away.
@@ -110,7 +102,7 @@ Let's take a cursory look at 3 basic archetypes of concurrency solutions, using 
    Multiprocessing is analogous to building a brand new shoe factory for every order of shoes we receive, rather than using existing factories to produce multiple shoes. Every factory has an enormous initial construction overhead, it takes up a lot of real estate, and sharing resources and information between the factories is very slow.
    Back to Python: The GIL, which limits Python execution to one line at a time, only enforces its lock within the same process since every process is its own complete Python entity. This means that Python can allow real cpu parallelization using multiprocessing (refer to [^1])
 
-2. <span class="term cursor-default px-1 rounded">Multithreading</span> - multithreading is a tricky, widely available solution for lean concurrency with shared resources within the same process. Threads are lighter execution units than processes. Let's refer back to the factory analogy. Here, we use just the one factory (=process) to run our code. We achieve concurrency by employing many workers to perform many tasks. The workers share the factory facilities and machines, so we save big on resources. If they can work at the same time (=in parallel), we can produce more in a given time (<span class="term cursor-default px-1 rounded">CPU-bound</span> work). 
+2. <span class="term cursor-default px-1 rounded">Multithreading</span> - multithreading is a tricky, widely available solution for lean concurrency with shared resources within the same process. Threads are lighter execution units than processes. Let's refer back to the factory analogy. Here, we use just the one factory (=process) to run our code. We achieve concurrency by employing many workers to perform many tasks. The workers share the factory facilities and machines, so we save big on resources. If they can work at the same time (=in parallel), we can produce more in a given time (<span class="term cursor-default px-1 rounded">CPU-bound</span> work).
 
    It is important to state that multithreading can also provide performance benefits for (<span class="term cursor-default px-1 rounded">I/O-bound</span> work). In languages with a GIL like Python, we effectively only allow one employee to work at any given time, and we switch between them. Why is this still useful? Workers, when not idle, can schedule deliveries, start long-running processes on machines, etc. - so if our factory mostly consists of kick-starting autonomous tasks (<span class="term cursor-default px-1 rounded">I/O-bound</span> work), multiple employees can still accomplish much more than a single employee. With the meager time each employee is given, he can start some independent task, such as scheduling a delivery. We immediately yell "freeze!" and transfer the working rights to another worker. He too, registers some task. When we return to the first worker, our delivery has already arrived, and our worker can program a processing machine before we freeze him again.
 

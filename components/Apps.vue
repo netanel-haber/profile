@@ -1,11 +1,9 @@
 <template>
     <div>
         <section class="flex gap-2 p-1 flex-wrap justify-center">
-            <button v-for="app in apps" :key="app.hash" :class="app.class" class="w-[135px] h-[135px] rounded-md"
-                @click="toggleIframe(app)" :aria-label="app.name" :style="{ backgroundImage: app.background }"
-                :aria-pressed="isActive(app)">
-                <img :src="app.image" class="w-full h-full p-1 rounded-md"
-                    :style="{ boxShadow: isActive(app) ? 'rgba(0, 0, 0, 0.75) 3px 3px 6px -1px' : 'unset' }" />
+            <button v-for="app in apps" :key="app.hash" :class="app.class" class="w-[135px] h-[135px] rounded-md focus:shadow-[rgba(0,_0,_0,_0.75)_3px_3px_6px_-1px]" @click="toggleIframe(app)" :aria-label="app.name"
+                :style="{ backgroundImage: app.background }" :aria-pressed="isActive(app)">
+                <img :src="app.image" class="w-full h-full p-1 rounded-md" />
             </button>
         </section>
         <section v-if="activeApp">
@@ -106,4 +104,3 @@ onMounted(() => {
     animation: nyan-cat-animation 5s linear infinite;
 }
 </style>
-  
