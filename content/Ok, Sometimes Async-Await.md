@@ -1,6 +1,6 @@
 ## Ok, Sometimes Async-Await
 
-Normally, I continue believing that the classic (well, ES6) `promise.then().catch().finally()` is nicer than using the newer ES17 `async-await` syntax, because of function composability.
+Normally, I continue believing that the classic (well, ES6) `promise.then().catch().finally()` is nicer than using the newer ES17 `async-await` syntax, because of function composability[^1].
 There are 2 cases where I think `async-await` is neater, and one where it may perceivably come in handy:
 
 ### 1. Early Return/Throwing Errors
@@ -60,3 +60,7 @@ Object.prototype.toString.call(() => producePromise()); // '[object Function]'
 
 So the language gives us a way to know if a function was declared with the `async` modifier.
 In some contrived scenario, we can imagine that it may be very useful to be able to check during runtime if the function will be asynchronous _before invoking it_.
+
+---
+
+[^1]: Composability: `fetchThing().then(doThing).catch(logError).finally(toFalse)`
