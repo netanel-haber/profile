@@ -21,7 +21,6 @@
 
         .price {
             font-size: 3em;
-            color: #76b900;
         }
     </style>
 </head>
@@ -34,7 +33,7 @@
         (function () {
             var t = new URLSearchParams(window.location.search).get('ticker');
             var proxyUrl = 'https://api.allorigins.win/get?url=';
-            var targetUrlHistorical = 'https://query1.finance.yahoo.com/v8/finance/chart/' + t + '?interval=1d&range=1mo';
+            var targetUrlHistorical = 'https://query1.finance.yahoo.com/v8/finance/chart/' + t + '?interval=1d&range=2mo';
             var targetUrlRealtime = 'https://query1.finance.yahoo.com/v8/finance/chart/' + t + '?interval=1m&range=1d';
             var urlHistorical = proxyUrl + encodeURIComponent(targetUrlHistorical);
             var urlRealtime = proxyUrl + encodeURIComponent(targetUrlRealtime);
@@ -51,7 +50,10 @@
                     })
                 ]).then(function (results) {
                     var historicalData = JSON.parse(results[0].contents);
-                    var avgPrice = historicalData.chart.result[0].indicators.quote[0].close.reduce(function (p, c, _, a) {
+                    var closes = historicalData.chart.result[0].indicators.quote[0].close;
+                    // Take the last 30 trading days
+                    var last30Closes = closes.slice(-30);
+                    var avgPrice = last30Closes.reduce(function (p, c, _, a) {
                         return p + c / a.length;
                     }, 0).toFixed(2);
 
