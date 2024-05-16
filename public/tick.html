@@ -5,19 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Price</title>
+    <style>
+        body {
+            background-image: url('https://media.giphy.com/media/lbXoHqVmsveXS/giphy.gif');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .price {
+            font-size: 3em;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="price">Loading...</div>
+    <audio id="alert-sound" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Bengo_Baja.webm"
+        preload="auto"></audio>
     <script>
-        const t = new URLSearchParams(window.location.search).get('ticker');
-        const proxyUrl = 'https://api.allorigins.win/get?url=';
-        const targetUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${t}?interval=1d&range=1mo`;
-        const url = proxyUrl + encodeURIComponent(targetUrl);
-        fetch(url).then((res) => res.json()).then((res) => {
-            const data = JSON.parse(res.contents);
-            const avgPrice = data.chart.result[0].indicators.quote[0].close.reduce((p, c, _, a) => p + c / a.length, 0).toFixed(2);
-            document.body.appendChild(document.createTextNode(avgPrice));
-        });
+        (function () {
+            var t = new URLSearchParams(window.location.search).get('ticker');
+            var proxyUrl = 'https://api.allorigins.win/get?url=';
+            var targetUrlHistorical = 'https://query1.finance.yahoo.com/v8/finance/chart/' + t + '?interval=1d&range=1mo';
+            var targetUrlRealtime = 'https://query1.finance.yahoo.com/v8/finance/chart/' + t + '?interval=1m&range=1d';
+            var urlHistorical = proxyUrl + encodeURIComponent(targetUrlHistorical);
+            var urlRealtime = proxyUrl + encodeURIComponent(targetUrlRealtime);
+            var alertSound = document.getElementById('alert-sound');
+            var priceElement = document.querySelector('.price');
+
+            function fetchPrice() {
+                Promise.all([
+                    fetch(urlHistorical).then(function (res) {
+                        return res.json();
+                    }),
+                    fetch(urlRealtime).then(function (res) {
+                        return res.json();
+                    })
+                ]).then(function (results) {
+                    var historicalData = JSON.parse(results[0].contents);
+                    var avgPrice = historicalData.chart.result[0].indicators.quote[0].close.reduce(function (p, c, _, a) {
+                        return p + c / a.length;
+                    }, 0).toFixed(2);
+
+                    var realtimeData = JSON.parse(results[1].contents);
+                    var currentPrice = realtimeData.chart.result[0].indicators.quote[0].close.slice(-1)[0].toFixed(2);
+
+                    priceElement.textContent = 'Avg: $' + avgPrice + ' | Current: $' + currentPrice;
+
+                    if (parseFloat(currentPrice) > 900) {
+                        alertSound.play();
+                    }
+                });
+            }
+
+            fetchPrice();
+            setInterval(fetchPrice, 10000);
+        })();
     </script>
 </body>
 
