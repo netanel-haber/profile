@@ -8,7 +8,10 @@
 <body>
     <script type="module">
         const t = new URLSearchParams(window.location.search).get('ticker');
-        const data = await (await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${t}?interval=1d&range=1mo`)).json();
+        const proxyUrl = 'https://api.allorigins.win/get?url=';
+        const targetUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${t}?interval=1d&range=1mo`;
+        const response = await (await fetch(proxyUrl + encodeURIComponent(targetUrl))).json();
+        const data = JSON.parse(response.contents);
         const avgPrice = data.chart.result[0].indicators.quote[0].close.reduce((p, c, _, a) => p + c / a.length, 0).toFixed(2);
         document.body.appendChild(document.createTextNode(avgPrice));
     </script>
