@@ -59,11 +59,18 @@ const apps = Object.entries({
         height: '850px',
     },
     "mac-apps": {
-        name: 'Friend Reaches 500 Wiki Edits',
+        name: 'Suggested Mac Apps',
         href: '/mac-apps.html',
         background: 'linear-gradient(90deg, rgb(240 238 234) 46%, rgb(141, 167, 185) 54%, rgb(55 144 179) 100%)',
         image: '/mac-logo.png',
-        height: '375px',
+        height: '450px',
+    },
+    "ubuntu-apps": {
+        name: 'Suggested Ubuntu Apps',
+        href: '/ubuntu-apps.html',
+        background: 'linear-gradient(90deg, rgb(221, 72, 20) 0%, rgb(252, 99, 25) 50%, rgb(255, 148, 86) 100%)',
+        image: '/ubuntu-logo.png',
+        height: '450px',
     },
 }).map(([hash, properties]) => ({ ...properties, hash }));
 
