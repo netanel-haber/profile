@@ -90,7 +90,7 @@ const apps = Object.entries({
     'vscode-extensions': {
         name: 'Awesome VSCode Extensions',
         href: '/vscode-extensions.html',
-        background: 'linear-gradient(90deg, #0066b8 0%, #0096d6 100%)',
+        background: 'linear-gradient(90deg, #4a9ce6 0%, #66c4fa 100%)',
         image: '/vscode-logo.png',
         height: '450px',
     },
