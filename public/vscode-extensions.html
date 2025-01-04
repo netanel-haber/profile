@@ -30,6 +30,17 @@
         padding: 0 0.5rem;
         font-weight: 600;
       }
+      details {
+        margin-bottom: 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        padding: 0.5rem 1rem;
+        background-color: #fff;
+      }
+      details summary {
+        cursor: pointer;
+        font-weight: 600;
+      }
       ol {
         list-style: none;
         padding: 0;
@@ -63,7 +74,7 @@
         border-radius: 0.25rem;
       }
       span {
-        margin: 0px 6px;
+        margin: 0 6px;
       }
    </style>
 </head>
@@ -76,24 +87,40 @@
    </h3>
 
    <fieldset>
-      <legend>Builtin features you should know</legend>
-      <ol>
-         <li>Fuzzy symbol search (v1.89+)</li>
-         <li>New auto-indent settings</li>
-         <li>Timeline for local history</li>
-         <li>Check existing features before installing an extension</li>
-      </ol>
-   </fieldset>
-
-   <fieldset>
       <legend>Essentials that are almost part of the editor</legend>
       <ol>
+         <li>
+            <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens" target="_blank">GitLens</a>
+            <span>-</span>Essential
+         </li>
          <li>
             <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack" target="_blank">Remote Development</a>
             <span>-</span>Connect to remote envs
          </li>
       </ol>
    </fieldset>
+
+   <details>
+      <summary>Builtin features you should know</summary>
+      <ol>
+         <li>
+            <a href="https://code.visualstudio.com/updates/v1_89#_quick-search" target="_blank">
+               Fuzzy symbol search (v1.89+)
+            </a>
+         </li>
+         <li>
+            <a href="https://code.visualstudio.com/updates/v1_89#_new-auto-indentation-setting" target="_blank">
+               New auto-indent settings
+            </a>
+         </li>
+         <li>
+            <a href="https://code.visualstudio.com/updates/v1_55#_timeline-view" target="_blank">
+               Timeline for local history
+            </a>
+         </li>
+         <li>Check existing features before installing an extension</li>
+      </ol>
+   </details>
 
    <fieldset>
       <legend>General niceties</legend>
