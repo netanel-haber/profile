@@ -52,27 +52,6 @@ const apps = Object.entries({
         height: '500px',
         class: 'nyan',
     },
-    resume: {
-        name: 'Resume',
-        href: 'https://www.netanel.dev/resume.pdf',
-        background: 'radial-gradient(circle, rgba(67,149,162,0.7570621468926554) 7%, rgba(249,212,72,0.8418079096045198) 45%, rgba(124,166,85,0.9491525423728814) 100%)',
-        image: '/resume.webp',
-        height: '850px',
-    },
-    password: {
-        name: 'Chrome Strong Password Generator',
-        href: 'https://netanel.dev/pwd',
-        background: 'radial-gradient(circle at 20% 4%, #4A90E2 0%, #4A90E2 25%, #DB4437 50%, #DB4437 75%, #F4B400 100%), radial-gradient(circle at 4% 4%, #4A90E2 0%, #4A90E2 25%, #0F9D58 50%, #F4B400 75%, #F4B400 100%)',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg',
-        height: '300px',
-    },
-    wiki: {
-        name: 'Friend Reaches 500 Wiki Edits',
-        href: '/talor-wiki.html',
-        background: 'radial-gradient(circle, #d6cab9 20%, #8da7b9 60%, #2d5f73 100%)',
-        image: '/globe.webp',
-        height: '850px',
-    },
     'mac-apps': {
         name: 'Suggested Mac Apps',
         href: '/mac-apps.html',
