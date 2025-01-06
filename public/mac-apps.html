@@ -54,39 +54,47 @@
             border-radius: 0.25rem;
         }
         span {
-            margin: 0px 6px;
+            margin: 0 6px;
         }
-        .raycast {
-            margin-left: 1rem;
+        .raycast-header {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #4b5563;
         }
-        .raycast a {
+        .raycast-button {
+            padding: 0.25rem 0.5rem;
+            background-color: #e0f2fe;
+            border: 1px solid #bae6fd;
+            border-radius: 0.25rem;
             text-decoration: none;
-            font-size: 1.2rem;
+            color: #0369a1;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .raycast-button:hover {
+            background-color: #bae6fd;
+            color: #034a76;
         }
     </style>
 </head>
 <body>
     <h3>Awesome Mac Apps (in order) <a target="_blank" href="https://github.com/netanel-haber/profile/edit/main/public/mac-apps.html"><img height="20px" src="/github.webp" alt="Edit List on github" /></a></h3>
+    <div class="raycast-header">Similar Raycast Functionality</div>
     <ol>
         <li>
             <div>
                 <a href="https://alt-tab-macos.netlify.app/" target="_blank">AltTab</a>
-                <span>-</span>Windows-like
-                <kbd>Cmd</kbd>+
-                <kbd>Tab</kbd>
+                <span>-</span>Windows-like <kbd>Cmd</kbd>+<kbd>Tab</kbd>
             </div>
-<div class="raycast">
-                <a href="https://www.raycast.com/changelog/1-19-0" target="_blank">✅</a>
-            </div>
+            <a href="https://www.raycast.com/changelog/1-19-0" target="_blank" class="raycast-button">Raycast Built-in Feature</a>
         </li>
         <li>
             <div>
                 <a href="https://rectangleapp.com/" target="_blank">Rectangle</a>
                 <span>-</span>Snap windows with keyboard
             </div>
-            <div class="raycast">
-                <a href="https://www.raycast.com/core-features/window-management" target="_blank">✅</a>
-            </div>
+            <a href="https://www.raycast.com/core-features/window-management" target="_blank" class="raycast-button">Raycast Built-in Feature</a>
         </li>
         <li>
             <div>
@@ -117,18 +125,14 @@
                 <a href="https://freemacsoft.net/appcleaner/" target="_blank">AppCleaner</a>
                 <span>-</span>Delete apps and all their files
             </div>
-            <div class="raycast">
-                <a href="https://www.raycast.com/resources/how-to-uninstall-apps-on-mac-os" target="_blank">✅</a>
-            </div>
+            <a href="https://www.raycast.com/resources/how-to-uninstall-apps-on-mac-os" target="_blank" class="raycast-button">Raycast Built-in Feature</a>
         </li>
         <li>
             <div>
                 <a href="https://apps.apple.com/us/app/amphetamine/id937984704" target="_blank">Amphetamine</a>
                 <span>-</span>Keep Your Mac Awake
             </div>
-            <div class="raycast-extension">
-                <a href="https://www.raycast.com/mooxl/coffee?ref=tsamoudakis.com" target="_blank">✅</a>
-            </div>
+            <a href="https://www.raycast.com/mooxl/coffee?ref=tsamoudakis.com" target="_blank" class="raycast-button">Raycast Extension Available</a>
         </li>
     </ol>
 </body>
