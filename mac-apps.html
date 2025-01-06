@@ -14,7 +14,7 @@
             box-sizing: border-box;
         }
         h3 {
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
@@ -25,15 +25,16 @@
             padding: 0;
         }
         li {
-            margin-bottom: 0.5rem;
-            padding: 0.25rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
             background-color: #ffffff;
             border: 1px solid #e5e7eb;
             border-radius: 0.375rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: center;
         }
         a {
             color: #2563eb;
@@ -53,17 +54,15 @@
             border: 1px solid #e5e7eb;
             border-radius: 0.25rem;
         }
-        span {
-            margin: 0 6px;
-        }
         .raycast-header {
             font-weight: bold;
             font-size: 1rem;
-            margin-bottom: 0.5rem;
             color: #4b5563;
+            margin-bottom: 0.5rem;
+            text-align: right;
         }
         .raycast-button {
-            padding: 0.25rem 0.5rem;
+            padding: 0.5rem 0.75rem;
             background-color: #e0f2fe;
             border: 1px solid #bae6fd;
             border-radius: 0.25rem;
@@ -71,15 +70,29 @@
             color: #0369a1;
             font-size: 0.875rem;
             font-weight: 600;
+            text-align: center;
+            display: inline-block;
         }
         .raycast-button:hover {
             background-color: #bae6fd;
             color: #034a76;
         }
+        @media (max-width: 600px) {
+            li {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            .raycast-header {
+                text-align: left;
+                margin-bottom: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <h3>Awesome Mac Apps (in order) <a target="_blank" href="https://github.com/netanel-haber/profile/edit/main/public/mac-apps.html"><img height="20px" src="/github.webp" alt="Edit List on github" /></a></h3>
+    <h3>Awesome Mac Apps (in order) <a target="_blank" href="https://github.com/netanel-haber/profile/edit/main/public/mac-apps.html"><img height="20px" src="/github.webp" alt="Edit List on GitHub"></a></h3>
     <div class="raycast-header">Similar Raycast Functionality</div>
     <ol>
         <li>
