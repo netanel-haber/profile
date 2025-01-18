@@ -4,42 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fruit in Thailand</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #e6ffe6, #fff8e1);
+            color: #333;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.25rem;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        li h2 {
+            margin: 1rem;
+            font-size: 1.5rem;
+        }
+
+        li p {
+            margin: 0 1rem 1rem;
+            color: #555;
+        }
+
+        li img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        footer {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Fruit in Thailand</h1>
-    <ul>
-
-        <li>
-            <h2>Indian jujube</h2>
-            <p>Location: krabi bus terminal</p>
-            <img src="./indian-jujube.jpeg" alt="Indian jujube" style="max-width:300px;">
-        </li>
-    
-        <li>
-            <h2>Mangosteen</h2>
-            <p>Location: chiang mai</p>
-            <img src="./mangosteen.jpeg" alt="Mangosteen" style="max-width:300px;">
-        </li>
-    
-        <li>
-            <h2>Durian</h2>
-            <p>Location: koh samui</p>
-            <img src="./durian.jpeg" alt="Durian" style="max-width:300px;">
-            <img src="./durian2.jpeg" alt="Durian-2" style="max-width:300px;">
-        </li>
-    
-        <li>
-            <h2>Rose apple</h2>
-            <p>Location: krabi bus terminal</p>
-            <img src="./rose-apple.jpeg" alt="Rose apple" style="max-width:300px;">
-        </li>
-    
-        <li>
-            <h2>Golden gooseberry</h2>
-            <p>Location: koh samui</p>
-            <img src="./golden-gooseberry.jpeg" alt="Golden gooseberry" style="max-width:300px;">
-        </li>
-    
-    </ul>
+    <header>
+        <h1>Fruit in Thailand</h1>
+        <p>Explore the tropical flavors of Thailand</p>
+    </header>
+    <main>
+        <ul>
+            <li>
+                <h2>Indian Jujube</h2>
+                <p>Location: Krabi Bus Terminal</p>
+                <img src="./indian-jujube.jpeg" alt="Indian Jujube">
+            </li>
+            <li>
+                <h2>Mangosteen</h2>
+                <p>Location: Chiang Mai</p>
+                <img src="./mangosteen.jpeg" alt="Mangosteen">
+            </li>
+            <li>
+                <h2>Durian</h2>
+                <p>Location: Koh Samui</p>
+                <img src="./durian.jpeg" alt="Durian">
+                <img src="./durian2.jpeg" alt="Durian-2" style="margin-top: 0.5rem;">
+            </li>
+            <li>
+                <h2>Rose Apple</h2>
+                <p>Location: Krabi Bus Terminal</p>
+                <img src="./rose-apple.jpeg" alt="Rose Apple">
+            </li>
+            <li>
+                <h2>Golden Gooseberry</h2>
+                <p>Location: Koh Samui</p>
+                <img src="./golden-gooseberry.jpeg" alt="Golden Gooseberry">
+            </li>
+        </ul>
+    </main>
+    <footer>
+        <p>Fruit in Thailand</p>
+    </footer>
 </body>
 </html>
