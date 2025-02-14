@@ -73,6 +73,13 @@ const apps = Object.entries({
         image: '/vscode-logo.png',
         height: '450px',
     },
+    'thai-fruit': {
+        name: 'Fruit I Ate in Thailand',
+        href: '/thai-fruit.html',
+        background: 'radial-gradient(circle, #f9e7ee 0%, #e7f9f2 100%)',
+        image: '/mangosteen.png',
+        height: '450px',
+    },
 }).map(([hash, properties]) => ({ ...properties, hash }));
 
 type App = typeof apps[number];
