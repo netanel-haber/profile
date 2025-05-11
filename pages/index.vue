@@ -1,5 +1,6 @@
 <template>
   <main class="mx-auto flex flex-col">
+    <apps />
     <section class="mb-3 flex flex-col gap-3">
       <article v-for="article in articles">
         <div class="p-1">
@@ -13,7 +14,6 @@
         <hr />
       </article>
     </section>
-    <apps />
   </main>
 </template>
 
