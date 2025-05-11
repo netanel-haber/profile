@@ -42,7 +42,7 @@ const apps = Object.entries({
         href: 'https://localfiles.stream',
         background: 'radial-gradient(circle at center, rgba(100, 108, 255, 0.2) 0%, rgb(0 0 0) 79%), radial-gradient(white 1px, transparent 1px), radial-gradient(white 1px, transparent 1px)',
         image: 'https://localfiles.stream/icon.svg',
-        height: '950px',
+        height: '500px',
     },
     nyan: {
         name: 'Tiny React Infinite Scroll',
