@@ -37,11 +37,11 @@ const apps = Object.entries({
         image: '/checkers.webp',
         height: '775px',
     },
-    chatgpt: {
-        name: 'My ChatGPT Custom Instructions',
-        href: 'https://netanel-haber.github.io/chatgpt-custom-instructions/',
-        background: 'radial-gradient(circle, rgb(216, 200, 200) 0%, #00a67fae 100%)',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
+    localfiles: {
+        name: 'Play Local Audio/Video [Mostly Mobile]',
+        href: 'https://localfiles.stream',
+        background: 'linear-gradient(135deg, #ffff66 0%, #66ffff 100%)',
+        image: 'https://localfiles.stream/icon.svg',
         height: '950px',
     },
     nyan: {
@@ -51,6 +51,20 @@ const apps = Object.entries({
         image: '/nyan.gif',
         height: '500px',
         class: 'nyan',
+    },
+    chatgpt: {
+        name: 'My ChatGPT Custom Instructions',
+        href: 'https://netanel-haber.github.io/chatgpt-custom-instructions/',
+        background: 'radial-gradient(circle, rgb(216, 200, 200) 0%, #00a67fae 100%)',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
+        height: '950px',
+    },
+    'thai-fruit': {
+        name: 'Fruit I Ate in Thailand',
+        href: '/thai-fruit.html',
+        background: 'radial-gradient(circle, #f9e7ee 0%, #e7f9f2 100%)',
+        image: '/mangosteen.png',
+        height: '450px',
     },
     'mac-apps': {
         name: 'Suggested Mac Apps',
@@ -71,13 +85,6 @@ const apps = Object.entries({
         href: '/vscode-extensions.html',
         background: 'linear-gradient(90deg, #4a9ce6 0%, #66c4fa 100%)',
         image: '/vscode-logo.png',
-        height: '450px',
-    },
-    'thai-fruit': {
-        name: 'Fruit I Ate in Thailand',
-        href: '/thai-fruit.html',
-        background: 'radial-gradient(circle, #f9e7ee 0%, #e7f9f2 100%)',
-        image: '/mangosteen.png',
         height: '450px',
     },
 }).map(([hash, properties]) => ({ ...properties, hash }));
