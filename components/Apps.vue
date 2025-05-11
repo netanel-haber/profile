@@ -1,5 +1,15 @@
 <template>
     <div>
+        <section v-if="activeApp">
+            <iframe
+                id="app"
+                :key="activeApp.hash"
+                class="w-full my-4 border"
+                allow="clipboard-write"
+                :style="{ height: activeApp.height }"
+                :src="activeApp.href"
+            ></iframe>
+        </section>
         <section class="flex gap-2 p-1 flex-wrap justify-center">
             <button
                 v-for="app in apps"
@@ -15,16 +25,6 @@
             </button>
         </section>
 
-        <section v-if="activeApp">
-            <iframe
-                id="app"
-                :key="activeApp.hash"
-                class="w-full my-4 border"
-                allow="clipboard-write"
-                :style="{ height: activeApp.height }"
-                :src="activeApp.href"
-            ></iframe>
-        </section>
     </div>
 </template>
 
@@ -40,7 +40,7 @@ const apps = Object.entries({
     localfiles: {
         name: 'Play Local Audio/Video [Mostly Mobile]',
         href: 'https://localfiles.stream',
-        background: 'linear-gradient(135deg, #ffff66 0%, #66ffff 100%)',
+        background: 'radial-gradient(circle at center, rgba(100, 108, 255, 0.2) 0%, rgb(0 0 0) 79%), radial-gradient(white 1px, transparent 1px), radial-gradient(white 1px, transparent 1px)',
         image: 'https://localfiles.stream/icon.svg',
         height: '950px',
     },
