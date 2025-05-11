@@ -1,15 +1,5 @@
 <template>
     <div>
-        <section v-if="activeApp">
-            <iframe
-                id="app"
-                :key="activeApp.hash"
-                class="w-full my-4 border"
-                allow="clipboard-write"
-                :style="{ height: activeApp.height }"
-                :src="activeApp.href"
-            ></iframe>
-        </section>
         <section class="flex gap-2 p-1 flex-wrap justify-center">
             <button
                 v-for="app in apps"
@@ -23,6 +13,16 @@
             >
                 <img :src="app.image" class="w-full h-full p-1 rounded-md" />
             </button>
+        </section>
+        <section v-if="activeApp">
+            <iframe
+                id="app"
+                :key="activeApp.hash"
+                class="w-full my-4 border"
+                allow="clipboard-write"
+                :style="{ height: activeApp.height }"
+                :src="activeApp.href"
+            ></iframe>
         </section>
 
     </div>
