@@ -1,1 +1,0 @@
-{"id":"186a6b1b-be69-447a-a585-df3240d525f5","timestamp":1755352914882,"matcher":{"static":{"/":null,"/blog":{"redirect":"/"},"/blog/concurrency":{"redirect":"/concurrency"},"/blog/typescript-typesystems-and-javascript":{"redirect":"/typescript-typesystems-and-javascript"}},"wildcard":{},"dynamic":{}},"prerendered":["/blog","/"]}
