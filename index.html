@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netanel Haber's 🏠 Website</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body class="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  <header class="p-2 shadow-xl">
+    <div class="max-w-2xl mx-auto flex justify-between items-center h-9">
+      <a href="/" class="text-lg font-semibold">Netanel Haber's 🏠 Website</a>
+      <div class="flex gap-3 items-center">
+        <a target="_blank" href="https://stackoverflow.com/users/12473000/notepadninja">
+          <img src="/stackoverflow.webp" width="24" alt="StackOverflow" />
+        </a>
+        <a target="_blank" href="https://github.com/netanel-haber/profile">
+          <img src="/github-mark-white.svg" width="24" alt="GitHub" />
+        </a>
+        <a target="_blank" href="https://www.linkedin.com/in/netanel-haber/">
+          <img src="/linkedin.webp" width="24" alt="LinkedIn" />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-2xl mx-auto w-full p-2">
+    <section id="buttons" class="flex gap-2 p-1 flex-wrap justify-center"></section>
+    <section id="iframe-section"></section>
+  </main>
+
+  <script>
+    const apps = [
+      { hash: 'checkers', name: 'Vanilla TS Checkers', href: 'https://netanel-haber.github.io/checkers/', background: 'linear-gradient(rgba(115,104,122,0.709),rgb(93,20,133))', image: '/checkers.webp', height: '775px' },
+      { hash: 'localfiles', name: 'Play Local Audio/Video [Mostly Mobile]', href: 'https://localfiles.stream', background: 'radial-gradient(circle at center, rgba(100,108,255,0.2) 0%, rgb(0 0 0) 79%)', image: '/localfiles.stream.svg', height: '500px' },
+      { hash: 'nyan', name: 'Tiny React Infinite Scroll', href: 'https://codesandbox.io/embed/78wnx?view=preview&module=%2Fsrc%2Fuseinfinitescroll.js&hidenavigation=1', background: 'linear-gradient(60deg,#ff0084,#ffce00,#29adff,#ff77a8,#ffccaa)', image: '/nyan.gif', height: '500px', class: 'nyan' },
+      { hash: 'chatgpt', name: 'My ChatGPT Custom Instructions', href: 'https://netanel-haber.github.io/chatgpt-custom-instructions/', background: 'radial-gradient(circle,rgb(216,200,200) 0%,#00a67fae 100%)', image: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg', height: '950px' },
+      { hash: 'thai-fruit', name: 'Fruit I Ate in Thailand', href: '/thai-fruit.html', background: 'radial-gradient(circle,#f9e7ee 0%,#e7f9f2 100%)', image: '/mangosteen.png', height: '450px' },
+      { hash: 'mac-apps', name: 'Suggested Mac Apps', href: '/mac-apps.html', background: 'linear-gradient(90deg,rgb(240 238 234) 46%,rgb(141,167,185) 54%,rgb(55 144 179) 100%)', image: '/mac-logo.png', height: '450px' },
+      { hash: 'ubuntu-apps', name: 'Suggested Ubuntu Apps', href: '/ubuntu-apps.html', background: 'linear-gradient(90deg,rgb(221,72,20) 0%,rgb(252,99,25) 50%,rgb(255,148,86) 100%)', image: '/ubuntu-logo.png', height: '450px' },
+      { hash: 'vscode-extensions', name: 'Awesome VSCode Extensions', href: '/vscode-extensions.html', background: 'linear-gradient(90deg,#4a9ce6 0%,#66c4fa 100%)', image: '/vscode-logo.png', height: '450px' }
+    ];
+
+    const buttons = document.getElementById('buttons');
+    const iframeSection = document.getElementById('iframe-section');
+    let activeHash = window.location.hash.slice(1);
+
+    function renderButtons() {
+      buttons.innerHTML = '';
+      apps.forEach(app => {
+        const btn = document.createElement('button');
+        btn.className = `rounded-md w-[135px] h-[135px] focus:border`;
+        btn.setAttribute('aria-label', app.name);
+        btn.setAttribute('aria-pressed', activeHash === app.hash);
+        btn.onclick = () => toggleIframe(app);
+        const img = document.createElement('img');
+        img.src = app.image;
+        img.className = "w-full h-full p-1 rounded-md";
+        btn.appendChild(img);
+        buttons.appendChild(btn);
+      });
+    }
+
+    function renderIframe() {
+      iframeSection.innerHTML = '';
+      const app = apps.find(a => a.hash === activeHash);
+      if (app) {
+        const iframe = document.createElement('iframe');
+        iframe.id = 'app';
+        iframe.src = app.href;
+        iframe.className = "w-full my-4 border dark:border-gray-700 rounded";
+        iframe.style.height = app.height;
+        iframe.setAttribute('allow', 'clipboard-write');
+        iframeSection.appendChild(iframe);
+        iframe.scrollIntoView();
+      }
+    }
+
+    function toggleIframe(app) {
+      activeHash = (activeHash === app.hash) ? '' : app.hash;
+      window.location.hash = activeHash;
+
+      renderIframe();
+    }
+
+    window.addEventListener('hashchange', () => {
+      activeHash = window.location.hash.slice(1);
+      renderIframe();
+      document.getElementById('app')?.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    renderButtons();
+    if (activeHash) renderIframe(); // <-- fix
+  </script>
+</body>
+
+</html>
