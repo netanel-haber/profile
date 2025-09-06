@@ -8,12 +8,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2.0.2
       - run: bun i
       - run: bun run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./.output/public
+          publish_dir: ./dist
