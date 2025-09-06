@@ -20,20 +20,12 @@ export default defineNuxtConfig({
       },
     ],
   },
-  modules: ["@nuxt/content", "@nuxtjs/tailwindcss", "@tailwindcss/typography"],
-  typescript: {
-    typeCheck: true,
-  },
+  modules: ["@nuxtjs/tailwindcss"],
   routeRules: {
     "/blog/": { redirect: "/" },
     "/blog/concurrency": { redirect: "/concurrency" },
     "/blog/typescript-typesystems-and-javascript": {
       redirect: "/typescript-typesystems-and-javascript",
-    },
-  },
-  content: {
-    highlight: {
-      theme: "synthwave-84",
     },
   },
 });
