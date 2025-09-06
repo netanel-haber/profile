@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Passwordinator</title>
+    <style>body{font-family:Arial;margin:20px;display:flex;flex-direction:column;}h3{margin-bottom:20px;}input,button{padding:10px;border-radius:4px;margin-bottom:10px;}#passwordInput{border:1px solid #ccc;}#textInput:empty{border:none;}button{background:#007bff;color:#fff;border:none;cursor:pointer;}#textInput:not(:empty){border:1px solid #ccc;}</style>
+</head>
+<body>
+    <h3>Passwordinator</h3>
+    <p>Chrome-only suggested password.</p>
+    <input type="password" id="passwordInput" autocomplete="new-password">
+    <input type="text" id="textInput">
+    <button onclick="copyToClipboard()">Copy</button>
+    <script>
+        let pwd = document.getElementById('passwordInput');
+        let txt = document.getElementById('textInput');
+        pwd.addEventListener('input', () => {txt.value = pwd.value;});
+        txt.addEventListener('input', () => {pwd.value = txt.value;});
+        function copyToClipboard() {navigator.clipboard.writeText(txt.value);}
+    </script>
+</body>
+</html>

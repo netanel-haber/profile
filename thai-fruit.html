@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fruit in Thailand</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #e6ffe6, #fff8e1);
+      color: #333;
+    }
+
+    header {
+      background-color: #4caf50;
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header .edit-button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    header .edit-button img {
+      height: 20px;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      /* Removed cursor pointer on the entire card */
+    }
+
+    li h2 {
+      margin: 1rem;
+      font-size: 1.5rem;
+    }
+
+    li h2 a {
+      color: #0645AD; 
+      text-decoration: underline;
+    }
+    li h2 a:hover {
+      color: #0366d6;
+    }
+
+    li p {
+      margin: 0 1rem 1rem;
+      color: #555;
+    }
+
+    li img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    li img:hover {
+      filter: brightness(1.1);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    footer {
+      background-color: #4caf50;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Fruit I ate in Thailand</h1>
+  <a class="edit-button" href="https://github.com/netanel-haber/profile/edit/main/public/thai-fruit.html" target="_blank">
+    <img src="/github.webp" alt="Edit List on github" />
+  </a>
+</header>
+<main>
+  <ul>
+    <li>
+      <h2>
+        <a href="https://en.wikipedia.org/wiki/Ziziphus_mauritiana" target="_blank" rel="noopener">
+          Indian Jujube
+        </a>
+      </h2>
+      <p>Location: Krabi Bus Terminal</p>
+      <img src="/indian-jujube.jpg" alt="Indian Jujube" onclick="showModal('/indian-jujube.jpg')" />
+    </li>
+
+    <li>
+      <h2>
+        <a href="https://en.wikipedia.org/wiki/Mangosteen" target="_blank" rel="noopener">
+          Mangosteen
+        </a>
+      </h2>
+      <p>Location: Chiang Mai</p>
+      <img src="/mangosteen.jpg" alt="Mangosteen" onclick="showModal('/mangosteen.jpg')" />
+    </li>
+
+    <li>
+      <h2>
+        <a href="https://en.wikipedia.org/wiki/Syzygium_samarangense" target="_blank" rel="noopener">
+          Rose Apple
+        </a>
+      </h2>
+      <p>Location: Krabi Bus Terminal</p>
+      <img src="/rose-apple.jpg" alt="Rose Apple" onclick="showModal('/rose-apple.jpg')" />
+    </li>
+
+    <li>
+      <h2>
+        <a href="https://en.wikipedia.org/wiki/Physalis_peruviana" target="_blank" rel="noopener">
+          Cape Gooseberry
+        </a>
+      </h2>
+      <p>Location: Koh Samui</p>
+      <img src="/golden-gooseberry.jpg" alt="Cape Gooseberry" onclick="showModal('/golden-gooseberry.jpg')" />
+    </li>
+
+    <li>
+      <h2>
+        <a href="https://en.m.wikipedia.org/wiki/Pyrus_pyrifolia" target="_blank" rel="noopener">
+          Korean Pear
+        </a>
+      </h2>
+      <p>Location: Mahanak Market, Bangkok</p>
+      <img src="/korean-pear.jpg" alt="Korean Pear" onclick="showModal('/korean-pear.jpg')" />
+    </li>
+
+    <li>
+      <h2>
+        <a href="https://en.wikipedia.org/wiki/Durian" target="_blank" rel="noopener">
+          Durian
+        </a>
+      </h2>
+      <p>Location: Koh Samui</p>
+      <img src="/durian.jpg" alt="Durian" onclick="showModal('/durian.jpg')" />
+      <img src="/durian2.jpg" alt="Durian-2" onclick="showModal('/durian2.jpg')" />
+    </li>
+
+    <li>
+      <h2>
+        <a href="https://en.wikipedia.org/wiki/Jackfruit" target="_blank" rel="noopener">
+          Jackfruit
+        </a>
+      </h2>
+      <p>Location: คลองศกแคมป์ (Klongsok Camp)</p>
+      <img src="/jackfruit.jpg" alt="Jackfruit" onclick="showModal('/jackfruit.jpg')" />
+      <img src="/jackfruit2.jpg" alt="Jackfruit-2" onclick="showModal('/jackfruit2.jpg')" />
+    </li>
+
+    <li>
+      <h2>
+        <a href="https://en.m.wikipedia.org/wiki/Pandanus_amaryllifolius" target="_blank" rel="noopener">
+          Pandan
+        </a>
+      </h2>
+      <p>Location: Chiang Mai Night Market and คลองศกแคมป์ (Klongsok Camp)</p>
+      <img src="/pandan-bun.jpg" alt="Pandan-Bun" onclick="showModal('/pandan-bun.jpg')" />
+      <img src="/pandan-kuih-tako-and-khanom-chan.jpg" alt="Pandan-Kuih-Tako-And-Khanom-Chan" onclick="showModal('/pandan-kuih-tako-and-khanom-chan.jpg')" />
+    </li>
+
+    <li>
+      <h2>
+        <a href="https://en.wikipedia.org/wiki/Longan" target="_blank" rel="noopener">
+          Longan (lam-yai)
+        </a>
+      </h2>
+      <p>Location: Wat Ta Khun Market</p>
+      <img src="/longan.jpg" alt="Longan" onclick="showModal('/longan.jpg')" />
+    </li>
+  </ul>
+</main>
+
+<div class="modal" id="modal" onclick="hideModal()">
+  <img id="modal-image" src="" alt="Enlarged view" />
+</div>
+
+<footer>
+  <p>Fruit in Thailand</p>
+</footer>
+
+<script>
+  const modal = document.getElementById('modal');
+  const modalImage = document.getElementById('modal-image');
+
+  function showModal(imageSrc) {
+    modalImage.src = imageSrc;
+    modal.classList.add('active');
+  }
+
+  function hideModal() {
+    modal.classList.remove('active');
+    modalImage.src = '';
+  }
+</script>
+</body>
+</html>
