@@ -16,3 +16,4 @@ logs
 !.env.example
 
 dist
+.vscode/**

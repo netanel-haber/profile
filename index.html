@@ -1,112 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netanel Haber's 🏠 Website</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Netanel Haber's 🏠 Website</title>
-  <link rel="stylesheet" href="index.css" />
-</head>
-
-<body class="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-  <header class="p-2 shadow-xl">
-    <div class="max-w-2xl mx-auto flex justify-between items-center h-9">
-      <a href="/" class="text-lg font-semibold">Netanel Haber's 🏠 Website</a>
-      <div class="flex gap-3 items-center">
-        <a target="_blank" href="https://stackoverflow.com/users/12473000/notepadninja">
-          <img src="/stackoverflow.webp" width="24" alt="StackOverflow" />
-        </a>
-        <a target="_blank" href="https://github.com/netanel-haber/profile">
-          <img src="/github-mark-white.svg" width="24" alt="GitHub" />
-        </a>
-        <a target="_blank" href="https://www.linkedin.com/in/netanel-haber/">
-          <img src="/linkedin.webp" width="24" alt="LinkedIn" />
-        </a>
+  <body
+    class="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+  >
+    <header class="p-2 shadow-xl">
+      <div class="max-w-2xl mx-auto flex justify-between items-center h-9">
+        <a href="/" class="text-lg font-semibold">Netanel Haber's 🏠 Website</a>
+        <div class="flex gap-3 items-center">
+          <a
+            target="_blank"
+            href="https://stackoverflow.com/users/12473000/notepadninja"
+          >
+            <img src="/stackoverflow.webp" width="24" alt="StackOverflow" />
+          </a>
+          <a target="_blank" href="https://github.com/netanel-haber/profile">
+            <img src="/github-mark-white.svg" width="24" alt="GitHub" />
+          </a>
+          <a target="_blank" href="https://www.linkedin.com/in/netanel-haber/">
+            <img src="/linkedin.webp" width="24" alt="LinkedIn" />
+          </a>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main class="flex-1 max-w-2xl mx-auto w-full p-2">
-    <section id="buttons" class="flex gap-2 p-1 flex-wrap justify-center">
-      <button data-hash="checkers" data-href="https://netanel-haber.github.io/checkers/" data-height="775px"
-        class="rounded-md w-[135px] h-[135px] focus:border" aria-label="Vanilla TS Checkers">
-        <img src="/checkers.webp" class="w-full h-full p-1 rounded-md">
-      </button>
+    <main class="flex-1 max-w-2xl mx-auto w-full p-2">
+      <section id="buttons" class="flex gap-2 p-1 flex-wrap justify-center">
+        <button
+          data-hash="checkers"
+          data-href="https://netanel-haber.github.io/checkers/"
+          data-height="775px"
+          class="rounded-md w-[135px] h-[135px] focus:border"
+          aria-label="Vanilla TS Checkers"
+        >
+          <img src="/checkers.webp" class="w-full h-full p-1 rounded-md" />
+        </button>
 
-      <button data-hash="localfiles" data-href="https://localfiles.stream" data-height="500px"
-        class="rounded-md w-[135px] h-[135px] focus:border" aria-label="Play Local Audio/Video [Mostly Mobile]">
-        <img src="/localfiles.stream.svg" class="w-full h-full p-1 rounded-md">
-      </button>
+        <button
+          data-hash="localfiles"
+          data-href="https://localfiles.stream"
+          data-height="500px"
+          class="rounded-md w-[135px] h-[135px] focus:border"
+          aria-label="Play Local Audio/Video [Mostly Mobile]"
+        >
+          <img
+            src="/localfiles.stream.svg"
+            class="w-full h-full p-1 rounded-md"
+          />
+        </button>
 
-      <button data-hash="nyan"
-        data-href="https://codesandbox.io/embed/78wnx?view=preview&module=%2Fsrc%2Fuseinfinitescroll.js&hidenavigation=1"
-        data-height="500px" class="rounded-md w-[135px] h-[135px] focus:border" aria-label="Tiny React Infinite Scroll">
-        <img src="/nyan.gif" class="w-full h-full p-1 rounded-md">
-      </button>
+        <button
+          data-hash="nyan"
+          data-href="https://codesandbox.io/embed/78wnx?view=preview&module=%2Fsrc%2Fuseinfinitescroll.js&hidenavigation=1"
+          data-height="500px"
+          class="rounded-md w-[135px] h-[135px] focus:border"
+          aria-label="Tiny React Infinite Scroll"
+        >
+          <img src="/nyan.gif" class="w-full h-full p-1 rounded-md" />
+        </button>
 
-      <button data-hash="chatgpt" data-href="https://netanel-haber.github.io/chatgpt-custom-instructions/"
-        data-height="950px" class="rounded-md w-[135px] h-[135px] focus:border"
-        aria-label="My ChatGPT Custom Instructions">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
-          class="w-full h-full p-1 rounded-md">
-      </button>
+        <button
+          data-hash="chatgpt"
+          data-href="https://netanel-haber.github.io/chatgpt-custom-instructions/"
+          data-height="950px"
+          class="rounded-md w-[135px] h-[135px] focus:border"
+          aria-label="My ChatGPT Custom Instructions"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
+            class="w-full h-full p-1 rounded-md"
+          />
+        </button>
 
-      <button data-hash="thai-fruit" data-href="/thai-fruit.html" data-height="450px"
-        class="rounded-md w-[135px] h-[135px] focus:border" aria-label="Fruit I Ate in Thailand">
-        <img src="/mangosteen.png" class="w-full h-full p-1 rounded-md">
-      </button>
+        <button
+          data-hash="thai-fruit"
+          data-href="/thai-fruit.html"
+          data-height="450px"
+          class="rounded-md w-[135px] h-[135px] focus:border"
+          aria-label="Fruit I Ate in Thailand"
+        >
+          <img src="/mangosteen.png" class="w-full h-full p-1 rounded-md" />
+        </button>
 
-      <button data-hash="mac-apps" data-href="/mac-apps.html" data-height="450px"
-        class="rounded-md w-[135px] h-[135px] focus:border" aria-label="Suggested Mac Apps" data-href="/mac-apps.html">
-        <img src="/mac-logo.png" class="w-full h-full p-1 rounded-md">
-      </button>
+        <button
+          data-hash="mac-apps"
+          data-href="/mac-apps.html"
+          data-height="450px"
+          class="rounded-md w-[135px] h-[135px] focus:border"
+          aria-label="Suggested Mac Apps"
+          data-href="/mac-apps.html"
+        >
+          <img src="/mac-logo.png" class="w-full h-full p-1 rounded-md" />
+        </button>
 
-      <button data-hash="ubuntu-apps" data-href="/ubuntu-apps.html" data-height="450px"
-        class="rounded-md w-[135px] h-[135px] focus:border" aria-label="Suggested Ubuntu Apps">
-        <img src="/ubuntu-logo.png" class="w-full h-full p-1 rounded-md">
-      </button>
+        <button
+          data-hash="ubuntu-apps"
+          data-href="/ubuntu-apps.html"
+          data-height="450px"
+          class="rounded-md w-[135px] h-[135px] focus:border"
+          aria-label="Suggested Ubuntu Apps"
+        >
+          <img src="/ubuntu-logo.png" class="w-full h-full p-1 rounded-md" />
+        </button>
 
-      <button data-hash="vscode-extensions" data-href="/vscode-extensions.html" data-height="450px"
-        class="rounded-md w-[135px] h-[135px] focus:border" aria-label="Awesome VSCode Extensions">
-        <img src="/vscode-logo.png" class="w-full h-full p-1 rounded-md">
-      </button>
+        <button
+          data-hash="vscode-extensions"
+          data-href="/vscode-extensions.html"
+          data-height="450px"
+          class="rounded-md w-[135px] h-[135px] focus:border"
+          aria-label="Awesome VSCode Extensions"
+        >
+          <img src="/vscode-logo.png" class="w-full h-full p-1 rounded-md" />
+        </button>
+      </section>
+      <section id="iframe-section"></section>
+    </main>
 
-
-    </section>
-    <section id="iframe-section"></section>
-  </main>
-
-  <script>
-    const iframeSection = document.getElementById('iframe-section');
-    function renderIframe({ href, height }) {
-      iframeSection.innerHTML = '';
-      const iframe = document.createElement('iframe');
-      iframe.id = 'app';
-      iframe.src = href;
-      iframe.className = "w-full my-4 border dark:border-gray-700 rounded";
-      iframe.style.height = height;
-      iframe.setAttribute('allow', 'clipboard-write');
-      iframeSection.appendChild(iframe);
-      iframe.scrollIntoView();
-    }
-
-    const buttons = Array.from(document.querySelectorAll('#buttons > button'));
-    buttons.forEach((btn) => {
-      btn.onclick = () => {
-        btn.setAttribute('aria-pressed', true);
-        const { hash } = btn.dataset;
-        renderIframe(btn.dataset);
-        document.getElementById('app')?.scrollIntoView({ behavior: 'smooth' });
-        window.location.hash = hash;
+    <script>
+      const iframeSection = document.getElementById("iframe-section");
+      function renderIframe({ href, height }) {
+        iframeSection.innerHTML = "";
+        const iframe = document.createElement("iframe");
+        iframe.id = "app";
+        iframe.src = href;
+        iframe.className = "w-full my-4 border dark:border-gray-700 rounded";
+        iframe.style.height = height;
+        iframe.setAttribute("allow", "clipboard-write");
+        iframeSection.appendChild(iframe);
+        iframe.scrollIntoView();
       }
-    })
 
-    const activeHash = window.location.hash.slice(1);
-    if (activeHash) {
-      app = buttons.find(btn => btn.dataset.hash === activeHash);
-      if (app) renderIframe(app.dataset);
-    }
-  </script>
-</body>
+      const buttons = Array.from(
+        document.querySelectorAll("#buttons > button"),
+      );
+      buttons.forEach((btn) => {
+        btn.onclick = () => {
+          btn.setAttribute("aria-pressed", true);
+          const { hash } = btn.dataset;
+          renderIframe(btn.dataset);
+          document
+            .getElementById("app")
+            ?.scrollIntoView({ behavior: "smooth" });
+          window.location.hash = hash;
+        };
+      });
 
+      const activeHash = window.location.hash.slice(1);
+      if (activeHash) {
+        app = buttons.find((btn) => btn.dataset.hash === activeHash);
+        if (app) renderIframe(app.dataset);
+      }
+    </script>
+  </body>
 </html>

@@ -1,0 +1,783 @@
+<DOCTYPE html>
+  <html lang="en" class="dark">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Concurrency</title>
+      <link rel="stylesheet" href="index.css" />
+    </head>
+
+    <body class="dark bg-black">
+      <main class="container bg-black mx-auto pt-6 flex justify-center">
+        <article class="prose dark:prose-invert">
+          <h2 id="concurrency">
+            <a href="#concurrency">Concurrency</a>
+          </h2>
+          <p>
+            This article aims to explain basic concepts related to concurrency,
+            which is used to solve performance related problems. It starts and
+            ends with Python (CPython, mostly), as a tie from and back into
+            reality - but isn't really about Python at all. Actually, it isn't
+            about any language, framework or library in particular. It aims to
+            take a step back from questions of application and start from first
+            principles.
+          </p>
+          <p>
+            Let's start by stating some facts about python concurrency. They may
+            seem contradictory or confusing - the rest of the article aims to
+            provide more clarity as to how they make sense together. It should
+            be noted that some of these facts pertain to a standard use of
+            Python - it is possible to bypass some limitations, either by using
+            a less popular Python implementation, or by using non-standard
+            <a href="https://numba.pydata.org/" rel="nofollow">tools</a> and
+            libraries.
+          </p>
+          <ol>
+            <li>
+              <strong>Python has threads.</strong>
+              If anyone says otherwise, they have important
+              <a
+                href="https://docs.python.org/3/library/threading.html"
+                rel="nofollow"
+                >standard</a
+              >
+              Python
+              <a
+                href="https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor"
+                rel="nofollow"
+                >modules</a
+              >
+              to explain away.
+            </li>
+            <li>
+              <strong>Python threads are useful</strong>.
+              <a
+                href="https://replit.com/@NetanelHaber/pythonthreads?v=1"
+                rel="nofollow"
+                >Here are numbers for you to look at</a
+              >.
+            </li>
+            <li>
+              <strong>No parallelization in python</strong>: CPython threads
+              cannot solve
+              <strong>every</strong>
+              problem threads are put to use for in languages like C and C++.
+            </li>
+            <li>
+              <strong
+                >Multi-processing can provide parallelization in Python</strong
+              >, although in practice the performance overhead will sometimes
+              cancel out or severely reduce the wanted benefit<sup
+                ><a
+                  aria-current="page"
+                  href="/concurrency#user-content-fn-1"
+                  class="router-link-active router-link-exact-active"
+                  aria-describedby="footnote-label"
+                  data-footnote-ref=""
+                  id="user-content-fnref-1"
+                  >1</a
+                ></sup
+              >.
+            </li>
+          </ol>
+          <p>
+            So what is the rule? When is multi-threading useful? Why is Python
+            different than some other languages?
+          </p>
+          <h3 id="types-of-work">
+            <a href="#types-of-work">Types of work</a>
+          </h3>
+          <p>
+            Two basic concepts in this space are
+            <span class="term cursor-default px-1 rounded"
+              ><a href="https://en.wikipedia.org/wiki/CPU-bound" rel="nofollow"
+                >CPU-bound</a
+              ></span
+            >
+            and
+            <span class="term cursor-default px-1 rounded"
+              ><a href="https://en.wikipedia.org/wiki/I/O_bound" rel="nofollow"
+                >I/O-bound</a
+              ></span
+            >
+            (Input/Output) work. It helps to first state a basic fact: Computers
+            have a fundamental bottleneck - they cannot execute more than one
+            command at any time. Modern "computers" actually contain multiple
+            computation units that can each execute one command at any given
+            time. To compare the two types of work, we will first look at a
+            single CPU core.
+          </p>
+          <h4
+            id="multithreading-cpu-bound-work-on-a-single-core-the-same-work-with-extra-steps"
+          >
+            <a
+              href="#multithreading-cpu-bound-work-on-a-single-core-the-same-work-with-extra-steps"
+              >Multithreading CPU-bound work on a single core - the same work
+              with extra steps</a
+            >
+          </h4>
+          <p>
+            If we task this computer with calculating
+            <code class="">(2 ^ 19) / (3 ^ 33)</code>, it will boil the task
+            down to a list of discreet commands to execute<sup
+              ><a
+                aria-current="page"
+                href="/concurrency#user-content-fn-2"
+                class="router-link-active router-link-exact-active"
+                aria-describedby="footnote-label"
+                data-footnote-ref=""
+                id="user-content-fnref-2"
+                >2</a
+              ></sup
+            >. This is very similar to human calculation. Say we've neared the
+            end of a meal at a restaurant. We have two tasks ahead of us:
+            Calculating the tip and calculating when to leave in order to catch
+            a bus. The former calculation may penalize us
+            <code class="">X</code> of our time, while the latter may take
+            <code class="">Y</code> of our time. In other words, altogether
+            <code class="">X+Y</code> work must be done. The "brain-power"
+            (=time) will be spent, regardless of the way the work is divided,
+            sliced or diced. <strong>This is CPU-bound work.</strong>
+          </p>
+          <h4 id="a-watched-pot-never-boils">
+            <a href="#a-watched-pot-never-boils">A watched pot never boils</a>
+          </h4>
+          <p>
+            Now the computer is tasked with scraping Google search results. It
+            receives a term as an argument and must retrieve the first 10 pages
+            of results. So it:
+          </p>
+          <ol>
+            <li>Asks for the first page <span>10ms</span>.</li>
+            <li>
+              <strong
+                >Waits for the result to return from Google servers
+                <span>80ms</span>.</strong
+              >
+            </li>
+            <li>
+              Receives the result and saves it in a file <span>10ms</span>.
+            </li>
+          </ol>
+          <p>
+            It then repeats these steps for all 10 pages. The execution times
+            are just an example, but resemble real-world times for similar
+            programs. So let's focus on 2 - it seems to be our performance
+            bottleneck, at 80% of all execution time. The key word here is
+            <strong>waiting</strong>. We have such a powerful tool at our
+            disposal, and it mostly waits - i.e., does nothing, for most of our
+            program. That's pretty unsavory. Next time you plan something with
+            friends, try waiting for each friend to confirm before asking the
+            next friend. <strong>This is I/O-bound work</strong>.
+          </p>
+          <p>
+            So a
+            <span class="term cursor-default px-1 rounded">CPU-bound</span>
+            task is one where the primary performance bottleneck is actual
+            <strong>work</strong> that cannot be avoided. An
+            <span class="term cursor-default px-1 rounded">I/O-bound</span>
+            task is one where the primary performance bottleneck is actually
+            just
+            <strong>waiting</strong>
+            for an external piece of data.
+          </p>
+          <p>
+            It is common sense that alleviating performance pain for problems
+            with different bottlenecks will look different for each type of
+            task. This is actually the key to our primary question. assessing
+            the type of work before us - CPU, I/O or a mixture of both - can
+            help us know in advance if certain solutions are applicable.
+          </p>
+          <h3 id="enhancing-performance">
+            <a href="#enhancing-performance">Enhancing Performance</a>
+          </h3>
+          <p>
+            So for the first calculation task, we have a discreet list of
+            commands we need to execute. Any unit can only execute one line at a
+            time. We've already mentioned modern computers have many such units.
+            So, for a slow program, the solution seems clear - divide and
+            conquer. We divide our computation into smaller coherent parts (so
+            we can assemble the solutions later for the final product), and give
+            each available unit in the computer one part at a time to execute.
+            For example, if we have a computation that can take 8X time, that
+            can be divided into 8 smaller computations that each can take X time
+            - and we have 8 cores - we can now accomplish this task in X time.
+            This means that in order to enhance performance for CPU-bound tasks
+            we need
+            <span class="term cursor-default px-1 rounded"
+              >parallelization</span
+            >
+            - computing simultaneously on multiple units.
+          </p>
+          <p>
+            The second task, where we were mostly waiting, can complete faster
+            by being able to do other work while waiting. In the wild, you might
+            see the term
+            <span class="term cursor-default px-1 rounded">asynchronous</span>
+            used to describe such programs that allow for doing work while
+            waiting, depending on the language or framework. We will use this
+            term as well<sup
+              ><a
+                aria-current="page"
+                href="/concurrency#user-content-fn-3"
+                class="router-link-active router-link-exact-active"
+                aria-describedby="footnote-label"
+                data-footnote-ref=""
+                id="user-content-fnref-3"
+                >3</a
+              ></sup
+            >.
+          </p>
+          <p>
+            On a side note, let's notice a subtle difference between the
+            enhancements we may gain from optimizing both types of work. While
+            both parallelization and asynchronous solutions can
+            <strong>save on overall execution time</strong>, they cannot both
+            <strong>reduce CPU usage and resources</strong>.
+          </p>
+          <p>
+            Consider 10 taps that produce 10L of water an hour. We need 100
+            liters altogether, so we're smart - we use 10 bottles and run all 10
+            taps at once. This should get us done in a minute, rather than 10
+            minutes. The trouble is the guy that arrived with us is also smart,
+            and wants his 100L's worth of water too. This is the trouble with
+            CPU work - the computer is capped at how much work it can accomplish
+            simultaneously. To this end, "optimizing" your program by
+            parallelizing its work doesn't really improve anything in terms of
+            the amount of hard work that needs to be completed<sup
+              ><a
+                aria-current="page"
+                href="/concurrency#user-content-fn-4"
+                class="router-link-active router-link-exact-active"
+                aria-describedby="footnote-label"
+                data-footnote-ref=""
+                id="user-content-fnref-4"
+                >4</a
+              ></sup
+            >.
+          </p>
+          <p>
+            In contrast, optimizing I/O bound programs can actually
+            <strong>reduce CPU usage</strong> - one problem with I/O bound
+            programs is that they needlessly waste CPU resources. In the best
+            case scenario, we can get rid of almost all of the idle CPU time -
+            which can be used to do more work<sup
+              ><a
+                aria-current="page"
+                href="/concurrency#user-content-fn-5"
+                class="router-link-active router-link-exact-active"
+                aria-describedby="footnote-label"
+                data-footnote-ref=""
+                id="user-content-fnref-5"
+                >5</a
+              ></sup
+            >
+            <sup
+              ><a
+                aria-current="page"
+                href="/concurrency#user-content-fn-6"
+                class="router-link-active router-link-exact-active"
+                aria-describedby="footnote-label"
+                data-footnote-ref=""
+                id="user-content-fnref-6"
+                >6</a
+              ></sup
+            >.
+          </p>
+          <h3 id="concurrency-1"><a href="#concurrency-1">Concurrency</a></h3>
+          <p>
+            So, CPU bound tasks could use parallel computing to achieve better
+            performance, while for I/O bound tasks we would simply try to do
+            more work while waiting. Generally, the blanket term for any
+            solution for both of these bounds is
+            <span class="term cursor-default px-1 rounded">concurrency</span>.
+            This denotes programs that cannot be thought about sequentially - in
+            order to achieve either solution, the language will now expose
+            syntax and interfaces that, while affording us the performance
+            benefits of concurrent code, prevent us from being able to read our
+            programs "line after line". It will now be possible for different
+            bits of our programs to execute out of order.
+          </p>
+          <p>Let's pause to list the terms we've encountered:</p>
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2">Concurrency</th>
+              </tr>
+              <tr>
+                <th>I/O-bound</th>
+                <th>CPU-bound</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Asynchronous Programming</td>
+                <td>Parallel Programming</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 id="challenges-on-the-way-to-real-world-solutions">
+            <a href="#challenges-on-the-way-to-real-world-solutions"
+              >Challenges on the way to real-world solutions</a
+            >
+          </h4>
+          <p>
+            As mentioned, different frameworks expose different interfaces to
+            programmers for writing concurrent code. Fundamentally, there are
+            two challenges for language designers:
+          </p>
+          <ol>
+            <li>
+              <strong>Implementation</strong>
+              - Developing the actual implementation(s) and mechanism(s) to
+              allow for such code to run. This is not a trivial problem,
+              especially if existing languages want to introduce new solutions.
+            </li>
+            <li>
+              <strong>Interface</strong>
+              - Exposing the syntax and high-level tools with which users may
+              interact with the implementations. This is also not a trivial
+              problem - as mentioned, thinking about concurrent code isn't
+              straightforward. Accordingly, a good language will look for
+              interfaces that allow for expressing concurrent code in a
+              readable, easy-to-reason-about way.
+            </li>
+          </ol>
+          <p>
+            Let's give an example for a challenge on the implementation side.
+            Cpython suffers from the
+            <span class="term cursor-default px-1 rounded"
+              ><a
+                href="https://www.youtube.com/watch?v=KVKufdTphKs"
+                rel="nofollow"
+                >GIL</a
+              ></span
+            >
+            - the global interpreter lock. This means that the python
+            interpreter cannot run more than one line of python bytecode at any
+            given time. This means that Python effectively bans parallelization
+            (<strong>within the same process</strong> - more on this soon), and
+            therefore cannot improve the execution time of CPU-bound programs
+            using concurrency<sup
+              ><a
+                aria-current="page"
+                href="/concurrency#user-content-fn-7"
+                class="router-link-active router-link-exact-active"
+                aria-describedby="footnote-label"
+                data-footnote-ref=""
+                id="user-content-fnref-7"
+                >7</a
+              ></sup
+            >.
+          </p>
+          <p>
+            Let's look at another example for a challenge, this time on the
+            interface side. Javascript, an async language by default, used to
+            only allow running code asynchronously using callbacks functions.
+            These functions are passed to async calls (like api requests). These
+            callbacks will eventually run with the result of async operations
+            and execute side effects, such as displaying the result of the
+            request on the page. Once we register a callback, we can continue
+            working while the resource fetches.
+          </p>
+          <p>
+            This pattern suffered from a problem dubbed
+            <span class="term cursor-default px-1 rounded"
+              ><a href="http://callbackhell.com/" rel="nofollow"
+                >"Callback Hell"</a
+              ></span
+            >, where dependent chains of asynchronous calls, which by necessity
+            meant nested callbacks, caused increasing right-indentation of code,
+            until the final callback code started on the 100th column, say.
+          </p>
+
+          <pre>
+          This
+                          isn't
+                                      a
+                                              pleasant
+                                                              read.</pre
+          >
+          <p>
+            Addressing this, JavaScript introduced the
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+              rel="nofollow"
+              >Promise API</a
+            ><sup
+              ><a
+                aria-current="page"
+                href="/concurrency#user-content-fn-8"
+                class="router-link-active router-link-exact-active"
+                aria-describedby="footnote-label"
+                data-footnote-ref=""
+                id="user-content-fnref-8"
+                >8</a
+              ></sup
+            >.
+          </p>
+          <h3 id="a-taste-of-real-world-concurrency">
+            <a href="#a-taste-of-real-world-concurrency"
+              >A Taste of Real-world Concurrency</a
+            >
+          </h3>
+          <p>
+            Let's take a cursory look at 3 basic archetypes of concurrency
+            solutions, using a shoe factory as analogy.
+          </p>
+          <ol>
+            <li>
+              <span class="term cursor-default px-1 rounded"
+                >Multiprocessing</span
+              >
+              - multiprocessing can reduce the execution time of
+              <strong>both</strong> types of work. It involves using multiple OS
+              processes within the same program, and coordinating between them.
+              It is slow and very resource consuming in comparison with other
+              concurrency solutions. If we use Python as an example, every
+              process we spawn to run our code will, for example, contain its
+              own running Python interpreter including the initial overhead of
+              starting the process and the interpreter.<br />Multiprocessing is
+              analogous to building a brand new shoe factory for every order of
+              shoes we receive, rather than using existing factories to produce
+              multiple shoes. Every factory has an enormous initial construction
+              overhead, it takes up a lot of real estate, and sharing resources
+              and information between the factories is very slow. Back to
+              Python: The GIL, which limits Python execution to one line at a
+              time, only enforces its lock within the same process since every
+              process is its own complete Python entity. This means that Python
+              can allow real cpu parallelization using multiprocessing (refer to
+              <sup
+                ><a
+                  aria-current="page"
+                  href="/concurrency#user-content-fn-1"
+                  class="router-link-active router-link-exact-active"
+                  aria-describedby="footnote-label"
+                  data-footnote-ref=""
+                  id="user-content-fnref-1-2"
+                  >1</a
+                ></sup
+              >)
+            </li>
+            <li>
+              <span class="term cursor-default px-1 rounded"
+                >Multithreading</span
+              >
+              - multithreading is a tricky, widely available solution for lean
+              concurrency with shared resources within the same process. Threads
+              are lighter execution units than processes. Let's refer back to
+              the factory analogy. Here, we use just the one factory (=process)
+              to run our code. We achieve concurrency by employing many workers
+              to perform many tasks. The workers share the factory facilities
+              and machines, so we save big on resources. If they can work at the
+              same time (=in parallel), we can produce more in a given time
+              (<span class="term cursor-default px-1 rounded">CPU-bound</span>
+              work).<br />It is important to state that multithreading can also
+              provide performance benefits for (<span
+                class="term cursor-default px-1 rounded"
+                >I/O-bound</span
+              >
+              work). In languages with a GIL like Python, we effectively only
+              allow one employee to work at any given time, and we switch
+              between them. Why is this still useful? Workers, when not idle,
+              can schedule deliveries, start long-running processes on machines,
+              etc. - so if our factory mostly consists of kick-starting
+              autonomous tasks (<span class="term cursor-default px-1 rounded"
+                >I/O-bound</span
+              >
+              work), multiple employees can still accomplish much more than a
+              single employee. With the meager time each employee is given, he
+              can start some independent task, such as scheduling a delivery. We
+              immediately yell "freeze!" and transfer the working rights to
+              another worker. He too, registers some task. When we return to the
+              first worker, our delivery has already arrived, and our worker can
+              program a processing machine before we freeze him again.<br />Back
+              to reality. While multithreading is the ideal solution for
+              CPU-bound work, it is less than ideal for I/O bound work. Even in
+              a language that allows multi-threaded parallelism, our program
+              still has idle CPU usage while any given thread waits for some I/O
+              operation to complete. In addition, context switching between
+              threads is time consuming, and as running permission is a zero-sum
+              game, every millisecond of time given to one thread is a
+              millisecond taken from another. So every thread is still resource
+              consuming (though much leaner than a full process).
+            </li>
+            <li>
+              <span class="term cursor-default px-1 rounded"
+                >Asynchronous Tasks</span
+              >- This solution is relevant to I/O bound work, and can solve the
+              wasted resource issues highlighted in the previous paragraph when
+              using multithreading for I/O bound work. This is the final
+              improvement to our factory, and it includes paying one of our
+              employees more so he's willing to "multi-task".<br />Now, we hire
+              a supervisor and buy a whiteboard. Our supervisor's job is to
+              provide our employee with tasks to do when a task is completed.
+              The worker schedules some delivery. Instead of waiting for the
+              delivery, he first writes on the whiteboard: "Supervisor, please
+              let me know when the delivery has arrived for further processing".
+              Then he can immediately begin scheduling another delivery, or
+              operating on deliveries from yesterday. The supervisor keeps an
+              eye on the loading dock, and eventually the first delivery
+              arrives. He erases the task from the whiteboard and tells the
+              worker, who begins processing the delivery that just arrived. And
+              so on.<br />So this solution requires a couple of components, but
+              it can saves immensely on resources when the work is mostly I/O
+              bound - it needs a single thread for our actual code (the worker),
+              and some constant number of other threads and data structures to
+              inform our thread of new tasks and keep an eye out for completed
+              async operations (the supervisor) and keep tabs on registered
+              tasks (the whiteboard). Our code registers some async task, and
+              requests to be notified when it returns with the results. It
+              notifies the framework what it wants to do with the result, but
+              the syntax of how it is notified and the underlying objects are
+              very framework and languages specific.
+            </li>
+          </ol>
+          <h3 id="back-to-buzzwords">
+            <a href="#back-to-buzzwords">Back to buzzwords</a>
+          </h3>
+          <p>
+            The only way to get
+            <span class="term cursor-default px-1 rounded"
+              >parallelization</span
+            >
+            in Python - in order to reduce execution time for
+            <span class="term cursor-default px-1 rounded">CPU-bound</span>
+            programs, is
+            <span class="term cursor-default px-1 rounded"
+              >multi-processing</span
+            >, because of the
+            <span class="term cursor-default px-1 rounded">GIL</span>. This, by
+            definition, doesn't come with shared resources like
+            <span class="term cursor-default px-1 rounded"
+              >multi-threading</span
+            >
+            - so there's a large performance and resource penalty. This is not
+            to say that threads have no use in Python - they may be used for
+            reducing execution time for
+            <span class="term cursor-default px-1 rounded">I/O bound</span>
+            programs. Another Python-native alternative that can accomplish
+            basically the same thing is the newish
+            <a
+              href="https://docs.python.org/3/library/asyncio.html"
+              rel="nofollow"
+              >asyncio</a
+            >
+            library, that enables asynchronous code with a single thread.
+          </p>
+          <h3 id="ack">
+            <a href="#ack">Ack</a>
+          </h3>
+          <p>
+            <strong
+              >Writing and resources about concurrency that I like:</strong
+            >
+          </p>
+          <ol>
+            <li>
+              Great
+              <a
+                href="https://www.youtube.com/watch?v=lJ3NC-R3gSI"
+                rel="nofollow"
+                >talk</a
+              >
+              by Steve Klabnik.
+            </li>
+            <li>
+              Great
+              <a
+                href="https://eloquentjavascript.net/11_async.html"
+                rel="nofollow"
+                >chapter</a
+              >
+              about async in eloquentJS, an outstanding book.
+            </li>
+          </ol>
+          <p>
+            <strong>Friends that helped</strong>
+          </p>
+          <ol>
+            <li>Yoav Tzfati helped clean up my Python code</li>
+            <li>Naomi Kriger and Yoav read my drafts</li>
+          </ol>
+          <section class="footnotes" data-footnotes="">
+            <h2 id="footnote-label" class="sr-only">
+              <a href="#footnote-label">Footnotes</a>
+            </h2>
+            <ol>
+              <li id="user-content-fn-1">
+                A Python developer friend of mine offered up the following
+                heuristic: If you find yourself reaching for multi-processing in
+                order to incorporate parallel code execution, it's time to
+                choose a different language for this particular task.
+                <a
+                  aria-current="page"
+                  href="/concurrency#user-content-fnref-1"
+                  class="router-link-active router-link-exact-active data-footnote-backref"
+                  aria-label="Back to reference 1"
+                  data-footnote-backref=""
+                  >↩</a
+                >
+                <a
+                  aria-current="page"
+                  href="/concurrency#user-content-fnref-1-2"
+                  class="router-link-active router-link-exact-active data-footnote-backref"
+                  aria-label="Back to reference 1-2"
+                  data-footnote-backref=""
+                  >↩<sup>2</sup></a
+                >
+              </li>
+              <li id="user-content-fn-2">
+                For brevity, we also implicitly disregard a further step where
+                parallelism can come in handy - some calculations may perhaps
+                allow for non-sequential execution of certain steps. This
+                doesn't diminish the point, though. Say we've found the most
+                reduced version of the algorithm, split among as many units as
+                possible. We are still left with "hard" work needing to be
+                completed. So we've tried our best to reach a solution in as
+                little time as possible - but we still need to bite the bullet
+                of real work needing to be done.
+                <a
+                  aria-current="page"
+                  href="/concurrency#user-content-fnref-2"
+                  class="router-link-active router-link-exact-active data-footnote-backref"
+                  aria-label="Back to reference 2"
+                  data-footnote-backref=""
+                  >↩</a
+                >
+              </li>
+              <li id="user-content-fn-3">
+                Although you would be hard pressed to justify the semantics,
+                based on needle-thin differences between the dictionary
+                definitions of some of the above terms.
+                <a
+                  aria-current="page"
+                  href="/concurrency#user-content-fnref-3"
+                  class="router-link-active router-link-exact-active data-footnote-backref"
+                  aria-label="Back to reference 3"
+                  data-footnote-backref=""
+                  >↩</a
+                >
+              </li>
+              <li id="user-content-fn-4">
+                I think that for a programmer like me, who's written only
+                consumers - programs that just consume computing power - it may
+                be harder to understand this perspective. Once you write a
+                provider, such as an operating system, you suddenly understand
+                this. You own
+                <strong>all</strong> of the resources - so when you parallelize
+                management processes you'll notice you're stepping on your own
+                toes - all of your programs are standing in line for water.
+                <a
+                  aria-current="page"
+                  href="/concurrency#user-content-fnref-4"
+                  class="router-link-active router-link-exact-active data-footnote-backref"
+                  aria-label="Back to reference 4"
+                  data-footnote-backref=""
+                  >↩</a
+                >
+              </li>
+              <li id="user-content-fn-5">
+                We can also quantify CPU usage as energy expenditure to further
+                illustrate the point. There is no "free" energy - to this end,
+                parallelizing CPU-bound programs cannot save energy. Async code
+                also cannot save energy - but it
+                <strong>can</strong>
+                minimize wasting energy. A more concise (but, in reality, wrong)
+                framing of this idea is that the ideal program is only bound by
+                CPU usage, as a program where we've solved all I/O issues is
+                left with only CPU usage. This program doesn't exist, except in
+                theory. I/O includes loading the next CPU instructions and
+                reading registers as well, for example. In addition, These are
+                not the only two bounds a program may have, for example another
+                extremely important bound is
+                <span class="term cursor-default px-1 rounded"
+                  ><a
+                    href="https://en.wikipedia.org/wiki/Memory-bound_function"
+                    rel="nofollow"
+                    >memory</a
+                  ></span
+                >, and a program is a tradeoff between all bounds.
+                <a
+                  aria-current="page"
+                  href="/concurrency#user-content-fnref-5"
+                  class="router-link-active router-link-exact-active data-footnote-backref"
+                  aria-label="Back to reference 5"
+                  data-footnote-backref=""
+                  >↩</a
+                >
+              </li>
+              <li id="user-content-fn-6">
+                A clock-cycle saved is a clock-cycle earned. This key insight,
+                that a best case scenario asynchronous framework may reduce CPU
+                usage, is what allows event-driven servers to serve many
+                concurrent requests when the requests are mostly I/O bound. A
+                new thread need not be created to serve every request - this can
+                save an enormous amount of resources, in contrast with a
+                thread-per-request framework which is capped by the realistic
+                amount of threads that the server can maintain, thus severely
+                limiting the vertical scaling of the server's possible
+                concurrent requests.
+                <a
+                  aria-current="page"
+                  href="/concurrency#user-content-fnref-6"
+                  class="router-link-active router-link-exact-active data-footnote-backref"
+                  aria-label="Back to reference 6"
+                  data-footnote-backref=""
+                  >↩</a
+                >
+              </li>
+              <li id="user-content-fn-7">
+                Assuming only one line of Python bytecode is running allowed the
+                writers of python interpreters to write simpler implementations.
+                The trouble is, years later multi-threaded parallelization
+                became important to many programming fields where performance is
+                crucial. Now, existing Python implementations such as CPython
+                are in trouble because the one-line assumption is fundamentally
+                baked in to the underlying C and lifting the GIL as-is would
+                break the interpreter. The
+                <a
+                  href="https://www.youtube.com/watch?v=B_cQ0ykux_4"
+                  rel="nofollow"
+                  >"Gilectomy"</a
+                >, an attempt to remove the GIL from CPython, is a demonstration
+                to that effect.
+                <a
+                  aria-current="page"
+                  href="/concurrency#user-content-fnref-7"
+                  class="router-link-active router-link-exact-active data-footnote-backref"
+                  aria-label="Back to reference 7"
+                  data-footnote-backref=""
+                  >↩</a
+                >
+              </li>
+              <li id="user-content-fn-8">
+                This allows us to transform nested callbacks into a list,
+                eliminating callback nesting. Not much later, the language
+                introduced a syntactical wrapper for the promise API that uses
+                the
+                <span class="term cursor-default px-1 rounded">await</span>
+                keyword. This is an adoption of
+                <a
+                  href="https://en.wikipedia.org/wiki/Async/await"
+                  rel="nofollow"
+                  >syntax</a
+                >
+                common to many languages, which enables giving asynchronous code
+                a synchronous look, therefore arguably improving readability.
+                <a
+                  aria-current="page"
+                  href="/concurrency#user-content-fnref-8"
+                  class="router-link-active router-link-exact-active data-footnote-backref"
+                  aria-label="Back to reference 8"
+                  data-footnote-backref=""
+                  >↩</a
+                >
+              </li>
+            </ol>
+          </section>
+        </article>
+      </main>
+    </body>
+  </html>
+</DOCTYPE>
