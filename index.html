@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,13 +7,11 @@
     <link rel="stylesheet" href="index.css" />
   </head>
 
-  <body
-    class="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
-  >
-    <header class="p-2 shadow-xl">
-      <div class="max-w-2xl mx-auto flex justify-between items-center h-9">
-        <a href="/" class="text-lg font-semibold">Netanel Haber's 🏠 Website</a>
-        <div class="flex gap-3 items-center">
+  <body>
+    <header>
+      <div class="header-container">
+        <a href="/" class="site-title">Netanel Haber's 🏠 Website</a>
+        <div class="social-links">
           <a
             target="_blank"
             href="https://stackoverflow.com/users/12473000/notepadninja"
@@ -30,102 +28,87 @@
       </div>
     </header>
 
-    <main class="flex-1 max-w-2xl mx-auto w-full p-2">
-      <section id="buttons" class="flex gap-2 p-1 flex-wrap justify-center">
+    <main>
+      <section id="buttons">
         <a
           data-hash="dashdashhelp"
           href="https://dashdashhelp.win"
           data-height="500px"
-          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="DashDashHelp"
         >
-          <img src="https://dashdashhelp.win/favicon.svg" class="w-full h-full p-1 rounded-md object-contain" />
+          <img src="https://dashdashhelp.win/favicon.svg" alt="DashDashHelp" />
         </a>
 
         <a
           data-hash="checkers"
           href="https://netanel-haber.github.io/checkers/"
           data-height="775px"
-          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Vanilla TS Checkers"
         >
-          <img src="/checkers.webp" class="w-full h-full p-1 rounded-md" />
+          <img src="/checkers.webp" alt="Vanilla TS Checkers" />
         </a>
 
         <a
           data-hash="localfiles"
           href="https://localfiles.stream"
           data-height="500px"
-          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Play Local Audio/Video [Mostly Mobile]"
         >
-          <img
-            src="/localfiles.stream.svg"
-            class="w-full h-full p-1 rounded-md"
-          />
+          <img src="/localfiles.stream.svg" alt="Play Local Audio/Video" />
         </a>
 
         <a
           data-hash="nyan"
           href="https://codesandbox.io/embed/78wnx?view=preview&module=%2Fsrc%2Fuseinfinitescroll.js&hidenavigation=1"
           data-height="500px"
-          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Tiny React Infinite Scroll"
         >
-          <img src="/nyan.gif" class="w-full h-full p-1 rounded-md" />
+          <img src="/nyan.gif" alt="Tiny React Infinite Scroll" />
         </a>
 
         <a
           data-hash="chatgpt"
           href="https://netanel-haber.github.io/chatgpt-custom-instructions/"
           data-height="950px"
-          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="My ChatGPT Custom Instructions"
         >
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
-            class="w-full h-full p-1 rounded-md"
-          />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="My ChatGPT Custom Instructions" />
         </a>
 
         <a
           data-hash="thai-fruit"
           href="/thai-fruit.html"
           data-height="450px"
-          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Fruit I Ate in Thailand"
         >
-          <img src="/mangosteen.png" class="w-full h-full p-1 rounded-md" />
+          <img src="/mangosteen.png" alt="Fruit I Ate in Thailand" />
         </a>
 
         <a
           data-hash="mac-apps"
           href="/mac-apps.html"
           data-height="450px"
-          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Suggested Mac Apps"
         >
-          <img src="/mac-logo.png" class="w-full h-full p-1 rounded-md" />
+          <img src="/mac-logo.png" alt="Suggested Mac Apps" />
         </a>
 
         <a
           data-hash="ubuntu-apps"
           href="/ubuntu-apps.html"
           data-height="450px"
-          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Suggested Ubuntu Apps"
         >
-          <img src="/ubuntu-logo.png" class="w-full h-full p-1 rounded-md" />
+          <img src="/ubuntu-logo.png" alt="Suggested Ubuntu Apps" />
         </a>
 
         <a
           data-hash="vscode-extensions"
           href="/vscode-extensions.html"
           data-height="450px"
-          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Awesome VSCode Extensions"
         >
-          <img src="/vscode-logo.png" class="w-full h-full p-1 rounded-md" />
+          <img src="/vscode-logo.png" alt="Awesome VSCode Extensions" />
         </a>
       </section>
       <section id="iframe-section"></section>
@@ -138,7 +121,7 @@
         const iframe = document.createElement("iframe");
         iframe.id = "app";
         iframe.src = href;
-        iframe.className = "w-full my-4 border dark:border-gray-700 rounded";
+        iframe.className = "iframe-container";
         iframe.style.height = height;
         iframe.setAttribute("allow", "clipboard-write");
         iframeSection.appendChild(iframe);

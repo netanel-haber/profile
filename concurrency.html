@@ -1,5 +1,5 @@
 <DOCTYPE html>
-  <html lang="en" class="dark">
+  <html lang="en">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +7,9 @@
       <link rel="stylesheet" href="index.css" />
     </head>
 
-    <body class="dark bg-black">
-      <main class="container bg-black mx-auto pt-6 flex justify-center">
-        <article class="prose dark:prose-invert">
+    <body>
+      <main class="blog-main">
+        <article>
           <h2 id="concurrency">
             <a href="#concurrency">Concurrency</a>
           </h2>
@@ -89,13 +89,13 @@
           </h3>
           <p>
             Two basic concepts in this space are
-            <span class="term cursor-default px-1 rounded"
+            <span class="term"
               ><a href="https://en.wikipedia.org/wiki/CPU-bound" rel="nofollow"
                 >CPU-bound</a
               ></span
             >
             and
-            <span class="term cursor-default px-1 rounded"
+            <span class="term"
               ><a href="https://en.wikipedia.org/wiki/I/O_bound" rel="nofollow"
                 >I/O-bound</a
               ></span
@@ -172,10 +172,10 @@
           </p>
           <p>
             So a
-            <span class="term cursor-default px-1 rounded">CPU-bound</span>
+            <span class="term">CPU-bound</span>
             task is one where the primary performance bottleneck is actual
             <strong>work</strong> that cannot be avoided. An
-            <span class="term cursor-default px-1 rounded">I/O-bound</span>
+            <span class="term">I/O-bound</span>
             task is one where the primary performance bottleneck is actually
             just
             <strong>waiting</strong>
@@ -204,7 +204,7 @@
             - and we have 8 cores - we can now accomplish this task in X time.
             This means that in order to enhance performance for CPU-bound tasks
             we need
-            <span class="term cursor-default px-1 rounded"
+            <span class="term"
               >parallelization</span
             >
             - computing simultaneously on multiple units.
@@ -213,7 +213,7 @@
             The second task, where we were mostly waiting, can complete faster
             by being able to do other work while waiting. In the wild, you might
             see the term
-            <span class="term cursor-default px-1 rounded">asynchronous</span>
+            <span class="term">asynchronous</span>
             used to describe such programs that allow for doing work while
             waiting, depending on the language or framework. We will use this
             term as well<sup
@@ -290,7 +290,7 @@
             performance, while for I/O bound tasks we would simply try to do
             more work while waiting. Generally, the blanket term for any
             solution for both of these bounds is
-            <span class="term cursor-default px-1 rounded">concurrency</span>.
+            <span class="term">concurrency</span>.
             This denotes programs that cannot be thought about sequentially - in
             order to achieve either solution, the language will now expose
             syntax and interfaces that, while affording us the performance
@@ -346,7 +346,7 @@
           <p>
             Let's give an example for a challenge on the implementation side.
             Cpython suffers from the
-            <span class="term cursor-default px-1 rounded"
+            <span class="term"
               ><a
                 href="https://www.youtube.com/watch?v=KVKufdTphKs"
                 rel="nofollow"
@@ -382,7 +382,7 @@
           </p>
           <p>
             This pattern suffered from a problem dubbed
-            <span class="term cursor-default px-1 rounded"
+            <span class="term"
               ><a href="http://callbackhell.com/" rel="nofollow"
                 >"Callback Hell"</a
               ></span
@@ -427,7 +427,7 @@
           </p>
           <ol>
             <li>
-              <span class="term cursor-default px-1 rounded"
+              <span class="term"
                 >Multiprocessing</span
               >
               - multiprocessing can reduce the execution time of
@@ -460,7 +460,7 @@
               >)
             </li>
             <li>
-              <span class="term cursor-default px-1 rounded"
+              <span class="term"
                 >Multithreading</span
               >
               - multithreading is a tricky, widely available solution for lean
@@ -471,10 +471,10 @@
               to perform many tasks. The workers share the factory facilities
               and machines, so we save big on resources. If they can work at the
               same time (=in parallel), we can produce more in a given time
-              (<span class="term cursor-default px-1 rounded">CPU-bound</span>
+              (<span class="term">CPU-bound</span>
               work).<br />It is important to state that multithreading can also
               provide performance benefits for (<span
-                class="term cursor-default px-1 rounded"
+                class="term"
                 >I/O-bound</span
               >
               work). In languages with a GIL like Python, we effectively only
@@ -482,7 +482,7 @@
               between them. Why is this still useful? Workers, when not idle,
               can schedule deliveries, start long-running processes on machines,
               etc. - so if our factory mostly consists of kick-starting
-              autonomous tasks (<span class="term cursor-default px-1 rounded"
+              autonomous tasks (<span class="term"
                 >I/O-bound</span
               >
               work), multiple employees can still accomplish much more than a
@@ -503,7 +503,7 @@
               consuming (though much leaner than a full process).
             </li>
             <li>
-              <span class="term cursor-default px-1 rounded"
+              <span class="term"
                 >Asynchronous Tasks</span
               >- This solution is relevant to I/O bound work, and can solve the
               wasted resource issues highlighted in the previous paragraph when
@@ -538,24 +538,24 @@
           </h3>
           <p>
             The only way to get
-            <span class="term cursor-default px-1 rounded"
+            <span class="term"
               >parallelization</span
             >
             in Python - in order to reduce execution time for
-            <span class="term cursor-default px-1 rounded">CPU-bound</span>
+            <span class="term">CPU-bound</span>
             programs, is
-            <span class="term cursor-default px-1 rounded"
+            <span class="term"
               >multi-processing</span
             >, because of the
-            <span class="term cursor-default px-1 rounded">GIL</span>. This, by
+            <span class="term">GIL</span>. This, by
             definition, doesn't come with shared resources like
-            <span class="term cursor-default px-1 rounded"
+            <span class="term"
               >multi-threading</span
             >
             - so there's a large performance and resource penalty. This is not
             to say that threads have no use in Python - they may be used for
             reducing execution time for
-            <span class="term cursor-default px-1 rounded">I/O bound</span>
+            <span class="term">I/O bound</span>
             programs. Another Python-native alternative that can accomplish
             basically the same thing is the newish
             <a
@@ -691,7 +691,7 @@
                 reading registers as well, for example. In addition, These are
                 not the only two bounds a program may have, for example another
                 extremely important bound is
-                <span class="term cursor-default px-1 rounded"
+                <span class="term"
                   ><a
                     href="https://en.wikipedia.org/wiki/Memory-bound_function"
                     rel="nofollow"
@@ -756,7 +756,7 @@
                 eliminating callback nesting. Not much later, the language
                 introduced a syntactical wrapper for the promise API that uses
                 the
-                <span class="term cursor-default px-1 rounded">await</span>
+                <span class="term">await</span>
                 keyword. This is an adoption of
                 <a
                   href="https://en.wikipedia.org/wiki/Async/await"
