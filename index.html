@@ -32,109 +32,108 @@
 
     <main class="flex-1 max-w-2xl mx-auto w-full p-2">
       <section id="buttons" class="flex gap-2 p-1 flex-wrap justify-center">
-        <button
+        <a
           data-hash="dashdashhelp"
-          data-href="https://dashdashhelp.win"
+          href="https://dashdashhelp.win"
           data-height="500px"
-          class="rounded-md w-[110px] h-[110px] focus:border"
+          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="DashDashHelp"
         >
           <img src="https://dashdashhelp.win/favicon.svg" class="w-full h-full p-1 rounded-md object-contain" />
-        </button>
+        </a>
 
-        <button
+        <a
           data-hash="checkers"
-          data-href="https://netanel-haber.github.io/checkers/"
+          href="https://netanel-haber.github.io/checkers/"
           data-height="775px"
-          class="rounded-md w-[110px] h-[110px] focus:border"
+          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Vanilla TS Checkers"
         >
           <img src="/checkers.webp" class="w-full h-full p-1 rounded-md" />
-        </button>
+        </a>
 
-        <button
+        <a
           data-hash="localfiles"
-          data-href="https://localfiles.stream"
+          href="https://localfiles.stream"
           data-height="500px"
-          class="rounded-md w-[110px] h-[110px] focus:border"
+          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Play Local Audio/Video [Mostly Mobile]"
         >
           <img
             src="/localfiles.stream.svg"
             class="w-full h-full p-1 rounded-md"
           />
-        </button>
+        </a>
 
-        <button
+        <a
           data-hash="nyan"
-          data-href="https://codesandbox.io/embed/78wnx?view=preview&module=%2Fsrc%2Fuseinfinitescroll.js&hidenavigation=1"
+          href="https://codesandbox.io/embed/78wnx?view=preview&module=%2Fsrc%2Fuseinfinitescroll.js&hidenavigation=1"
           data-height="500px"
-          class="rounded-md w-[110px] h-[110px] focus:border"
+          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Tiny React Infinite Scroll"
         >
           <img src="/nyan.gif" class="w-full h-full p-1 rounded-md" />
-        </button>
+        </a>
 
-        <button
+        <a
           data-hash="chatgpt"
-          data-href="https://netanel-haber.github.io/chatgpt-custom-instructions/"
+          href="https://netanel-haber.github.io/chatgpt-custom-instructions/"
           data-height="950px"
-          class="rounded-md w-[110px] h-[110px] focus:border"
+          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="My ChatGPT Custom Instructions"
         >
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"
             class="w-full h-full p-1 rounded-md"
           />
-        </button>
+        </a>
 
-        <button
+        <a
           data-hash="thai-fruit"
-          data-href="/thai-fruit.html"
+          href="/thai-fruit.html"
           data-height="450px"
-          class="rounded-md w-[110px] h-[110px] focus:border"
+          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Fruit I Ate in Thailand"
         >
           <img src="/mangosteen.png" class="w-full h-full p-1 rounded-md" />
-        </button>
+        </a>
 
-        <button
+        <a
           data-hash="mac-apps"
-          data-href="/mac-apps.html"
+          href="/mac-apps.html"
           data-height="450px"
-          class="rounded-md w-[110px] h-[110px] focus:border"
+          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Suggested Mac Apps"
-          data-href="/mac-apps.html"
         >
           <img src="/mac-logo.png" class="w-full h-full p-1 rounded-md" />
-        </button>
+        </a>
 
-        <button
+        <a
           data-hash="ubuntu-apps"
-          data-href="/ubuntu-apps.html"
+          href="/ubuntu-apps.html"
           data-height="450px"
-          class="rounded-md w-[110px] h-[110px] focus:border"
+          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Suggested Ubuntu Apps"
         >
           <img src="/ubuntu-logo.png" class="w-full h-full p-1 rounded-md" />
-        </button>
+        </a>
 
-        <button
+        <a
           data-hash="vscode-extensions"
-          data-href="/vscode-extensions.html"
+          href="/vscode-extensions.html"
           data-height="450px"
-          class="rounded-md w-[110px] h-[110px] focus:border"
+          class="rounded-md w-[110px] h-[110px] focus:border block"
           aria-label="Awesome VSCode Extensions"
         >
           <img src="/vscode-logo.png" class="w-full h-full p-1 rounded-md" />
-        </button>
+        </a>
       </section>
       <section id="iframe-section"></section>
     </main>
 
     <script>
       const iframeSection = document.getElementById("iframe-section");
-      function renderIframe({ href, height }) {
+      function renderIframe(href, height) {
         iframeSection.innerHTML = "";
         const iframe = document.createElement("iframe");
         iframe.id = "app";
@@ -146,14 +145,15 @@
         iframe.scrollIntoView();
       }
 
-      const buttons = Array.from(
-        document.querySelectorAll("#buttons > button"),
+      const links = Array.from(
+        document.querySelectorAll("#buttons > a"),
       );
-      buttons.forEach((btn) => {
-        btn.onclick = () => {
-          btn.setAttribute("aria-pressed", true);
-          const { hash } = btn.dataset;
-          renderIframe(btn.dataset);
+      links.forEach((link) => {
+        link.onclick = (e) => {
+          e.preventDefault();
+          link.setAttribute("aria-pressed", true);
+          const { hash } = link.dataset;
+          renderIframe(link.href, link.dataset.height);
           document
             .getElementById("app")
             ?.scrollIntoView({ behavior: "smooth" });
@@ -163,8 +163,8 @@
 
       const activeHash = window.location.hash.slice(1);
       if (activeHash) {
-        app = buttons.find((btn) => btn.dataset.hash === activeHash);
-        if (app) renderIframe(app.dataset);
+        app = links.find((link) => link.dataset.hash === activeHash);
+        if (app) renderIframe(app.href, app.dataset.height);
       }
     </script>
   </body>
