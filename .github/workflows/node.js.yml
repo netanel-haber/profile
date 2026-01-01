@@ -1,19 +1,16 @@
-name: Bun CI
+name: Deploy Static Site
 
 on:
   push:
     branches: ["main"]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: oven-sh/setup-bun@v2.0.2
-      - run: bun i
-      - run: bun run build
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: .
