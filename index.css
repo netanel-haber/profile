@@ -5,9 +5,23 @@
   box-sizing: border-box;
 }
 
+/* Theme colors - Dark by default */
 html {
-  background-color: #111827;
-  color: #f3f4f6;
+  --bg-primary: #111827;
+  --text-primary: #f3f4f6;
+  --border-color: #374151;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Light theme when explicitly set */
+html.light {
+  --bg-primary: #ffffff;
+  --text-primary: #111827;
+  --border-color: #e5e7eb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -20,7 +34,7 @@ body {
 /* Header */
 header {
   padding: 0.5rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
 }
 
 .header-container {
@@ -103,7 +117,7 @@ main {
 .iframe-container {
   width: 100%;
   margin: 1rem 0;
-  border: 1px solid #374151;
+  border: 1px solid var(--border-color);
   border-radius: 0.25rem;
 }
 
