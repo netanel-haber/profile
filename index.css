@@ -96,6 +96,16 @@ main {
   border-radius: 0.5625rem;
   object-fit: contain;
 }
+.gibbous-mark {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: 0.5625rem;
+  background: #101722;
+  font-size: 4.75rem;
+  line-height: 1;
+}
 
 #buttons a[data-hash="dontbeasillygoose"] iframe {
   display: block;
