@@ -79,6 +79,7 @@ main {
   border: 0;
   border-radius: 0.625rem;
   background: var(--tile-bg);
+  text-decoration: none;
 }
 
 #buttons a:focus {
@@ -103,7 +104,7 @@ main {
   place-items: center;
   border-radius: 0.5625rem;
   background: #101722;
-  font-size: 4.75rem;
+  font-size: 6rem;
   line-height: 1;
 }
 
